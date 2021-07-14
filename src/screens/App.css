@@ -1,0 +1,230 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800;900&display=swap');
+
+.accordion {
+  margin-top:20px ;
+  max-width: 400px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+  overflow: hidden;
+  font-family: "Quicksand", sans-serif;
+  background: #009578;
+  align-content: center;
+  align-self: center;
+  align-items: center;
+}
+
+
+
+.accordion__label,
+.accordion__content {
+  padding: 14px 20px;
+}
+
+.accordion__label {
+  display: block;
+  color: #ffffff;
+  font-weight: 500;
+  cursor: pointer;
+  position: relative;
+  transition: background 0.1s;
+}
+
+.accordion__label:hover {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.accordion__label::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 20px;
+  width: 12px;
+  height: 6px;
+  background-image: url('data:image/svg+xml;utf8,<svg width="100" height="50" xmlns="http://www.w3.org/2000/svg"><polygon points="0,0 100,0 50,50" style="fill:%23FFFFFF99;" /></svg>');
+  background-size: contain;
+  transition: transform 0.4s;
+}
+
+.accordion__content {
+  background: #ffffff;
+  line-height: 1.6;
+  font-size: 0.85em;
+  display: none;
+}
+
+.accordion__input {
+  display: none;
+}
+
+.accordion__input:checked ~ .accordion__content {
+  display: block;
+}
+
+.accordion__input:checked ~ .accordion__label::after {
+  transform: translateY(-50%) rotate(0.5turn);
+}
+
+.faq
+{
+    position: relative;
+    min-height:200vh;
+    padding:50px 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: white;
+    border-top: 0.5px solid black;
+}
+
+* {
+    margin:0;
+    padding:0;
+    box-sizing:boder-box;
+    font-family:'poppins',sans-serif;
+}  
+
+.contactUs{
+    color: white;
+    text-align: center;
+}
+.contactInfo{
+    float: left;
+    width: 60%;
+    background-color: black;
+}
+.contact-section{
+    
+    width: 40%;
+    text-align: left;
+    margin-left: 20px;
+}
+.contact-section h3{
+    color: lightskyblue;
+}
+.container{
+    margin-left: 50%;
+    width: 200px;
+    background-color: white;
+    height: 310px;
+
+}
+
+.contactForm
+{
+    width:100%;
+    padding-top: 40px;
+}
+
+.contactForm h2
+{
+    font-size:30px;
+    color: #333;
+    font-weight: 500;
+}
+
+.contactForm .inputBox
+{
+    display: inline-block;
+    position: relative;
+    margin-top:10px;
+
+}
+.inputText{
+    height: 40px;
+    margin-bottom: 20px;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    outline: none;
+    border-bottom: 1px solid black;
+}
+.contactForm .inputBox input,
+.contactForm.inputBox textarea, button
+{
+   
+    padding:5px 0;
+    font-size: 16px ;
+    margin:10px 0;
+    border:none;
+    border-bottom: 2px solid #333;
+    outline: none;
+    resize:none;
+
+}
+
+.contactForm  .inputBox span
+{
+    position: absolute;
+    left:0;
+    padding:5px 0;
+    font-size: 16px ;
+    margin:10px 0;
+    pointer-events: none;
+    transition: 0.5%;
+    color: #666;
+}
+
+.contactForm .inputBox input:focus ~ span,
+.contactForm .inputBox input:valid ~ span,
+.contactForm .inputBox textarea:focus ~ span,
+.contactForm .inputBox textarea:valid ~ span
+{
+    color: #e91e63;
+    font-size: 12px;
+    transform: translateY(-20px);
+}
+
+.contactForm .inputBox input[type = "submit"] 
+{
+    width:100px;
+    background:#00bcd4;
+    color:#fff;
+    border:none;
+    cursor: pointer;
+    padding:10px;
+    font-size: 18px;
+}
+
+button{
+   width:100px; 
+   border:none;
+    cursor: pointer;
+    padding:10px;
+    font-size: 18px
+}
+
+
+
+@media( max-width: 991px)
+{
+    .contactUs
+    {
+        padding: 50px;
+    }
+
+    .container
+    {
+        flex-direction: column;
+    }
+
+    .container .contactInfo
+    {
+        margin-bottom: 40px;
+    }
+
+    .container .contactInfo .contactForm
+    {
+        width:100%;
+
+    }
+}
+    
+
+
+
+
+
+
+
