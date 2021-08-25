@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import fire from './fire';
 import validate from './validateInfo';
 import useForm from './useForm';
@@ -13,6 +13,32 @@ const EditProfileScreen = ()=>{
     const storage = fire.storage();
     const [image,setImage] = useState(null);
     const [url, setUrl]  = useState('');
+    const [userInfo,setUserInfo] = useState([]);
+
+    useEffect(()=>{
+        fire.database().ref(`users/${fire.auth().currentUser.uid}`).on('value', snapshot =>{
+            if(snapshot.exists()){
+                 let Items = snapshot.val();
+                 let newItems = [];
+                 for(let x = 0; x< 1; x++){
+                 
+                     newItems.push({
+                         username: Items.username,
+                         surname: Items.surname,
+                         type: Items.type,
+                         companyName: Items.companyName,
+                         profileImage: Items.profileImage,
+                         sectorOfBusiness: Items.sector,
+                
+                             
+                     });
+             
+                 }
+                 setUserInfo(newItems);
+            }
+ 
+        });
+    },[])
 
     const handleChange = e  =>{
         if(e.target.files[0]){
@@ -40,16 +66,24 @@ const EditProfileScreen = ()=>{
                 
         
               if(current != null){
-            
-                db.ref(`users/entrepreneurInfo/${fire.auth().currentUser.uid}`).set({
-                  profileImage: url,
-                  username: values.username,
-                  companyName: values.companyName,
-                  companyDescription: values.companyDescription,
-                }).then(()=>{
-                  alert("Profile Updated");
-                });
-            
+                userInfo.map(item =>{
+                    console.log(item);
+                    db.ref(`users/${current.uid}`).set({
+                      
+                        username: item.username,
+                        surname:item.surname,
+                        type: item.type,
+                        companyName:item.companyName,
+                        sector: values.sectorOfBusiness,
+                        profileImage: url,
+                        companyDescription: values.companyDescription,
+                      }).then(()=>{
+                        alert('Update Complete',
+                        'Your Profile has Successfully been Updated!')
+                      });
+                  
+                })
+                
     
               }
               
@@ -65,36 +99,21 @@ const EditProfileScreen = ()=>{
             <div className="Post-main">
             <img width={300} src={url} height={300} alt = "post image"className="post-imageholder"/>
             <div className="edit-input-section">
-            <input  type = "file" onChange = {handleChange}  className="file-btn"/>
-                <input 
-                    type="text" 
-                    name="username"
-                    placeholder="please insert your full name"
-                    onChange={handleChangeP}
-                    value={values.username}
-                    className="post-input"
-                />
-                <input 
-                    type="text" 
-                    name="companyName"
-                    placeholder="please insert your full name"
-                    onChange={handleChangeP}
-                    value={values.companyName}
-                    className="post-input"
-                />
-{ /*               <select 
-                    type="text" 
-                    name="sectorOfBusiness"
-                    placeholder="please insert your full name"
-                    onChange={handleChangeP}
-                    value={values.sectorOfBusiness}
-                    className="post-input"
+            <input  type = "file" onChange = {handleChange}  className="file-btn"/><br/>
+                <select
+                type="text"
+                name="sectorOfBusiness"
+                value={values.sectorOfBusiness}
+                onChange={handleChangeP}
                 >
-                    <option value=''> </option>
-                    <option value="manufacturing">Manufacturing</option>
-                    <option value="business">Finance and Business</option>
-                    <option value="tourism">Tourism</option>
-</select>*/}
+                <option value="" >Select Sector of Interest</option>
+                <option value="Agriculture">Agriculture</option>
+                <option value="Manufacturing">Manufacturing</option>
+                <option value="Tourism">Tourism</option>
+                <option value="Finances">Finances</option>
+                </select>
+ 
+
                 <textarea
                     name="companyDescription"
                     placeholder="Tell us a little bit about your business..."

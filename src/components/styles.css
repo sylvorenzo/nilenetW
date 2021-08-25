@@ -695,7 +695,7 @@ body{
     height: fit-content;
 }
 .resources-section{
-    width: 50%;
+    width: 100%;
     height: 300px;
     float: left;
     border-left: none;
@@ -707,7 +707,7 @@ body{
     overflow: hidden;
 }
 .resources-section1{
-    width: 50%;
+    width: 100%;
     height: 300px;
     float: right;
     border-left: none;

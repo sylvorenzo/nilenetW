@@ -1,6 +1,8 @@
 import { useState,useEffect} from 'react';
 import fire from './fire';
+import validate from './validateInfo';
 import {useHistory } from 'react-router-dom'
+import validateInfo from './validateInfo';
 const useForm = (callback, validate) => {
   //Creates all variables that will be used throughout the project
   const [values, setValues] = useState({
@@ -140,15 +142,21 @@ const useForm = (callback, validate) => {
 
   //handles the sign up functionality
   const handleSignup = ()=>{
-    setErrors(validate(values));
-    setIsSubmitting(true);
+    validateInfo(values.username,values.email,values.companyName,values.password,values.password2);
+    
     fire.auth().createUserWithEmailAndPassword(values.email,values.password).then(
       ()=>{
         const db = fire.database()
         
         var user = fire.auth().currentUser;
         db.ref('/users/'+ user.uid).set({
-          type: values.type
+          username: values.username,
+          surname: values.surname,
+          sector: values.sectorOfBusiness,
+          companyName:values.companyName,
+          type:values.type,
+          companyDescription:'',
+          profileImage:'',
         }).then(()=>{
           alert("successful upload")
         })

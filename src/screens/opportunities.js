@@ -26,7 +26,7 @@ const OpportunitiesScreen = ()=>{
                         </a>
                     </button>
                     <button className="opportunities-categories">
-                        <a href='https://www.gov.za/tenders'>
+                        <a href='https://www.eTenders.gov.za'>
                             Visit Tender Site
                         </a>
                     </button>

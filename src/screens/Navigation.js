@@ -71,7 +71,7 @@ const Navigation = () => {
       });
 
     // retreives entrepreneur data from database
-    fire.database().ref(`users/entrepreneurInfo/${fire.auth().currentUser.uid}`).on('value', snapshot =>{
+    fire.database().ref(`users/${fire.auth().currentUser.uid}`).on('value', snapshot =>{
       if(snapshot.exists()){
 
         let Items = snapshot.val();

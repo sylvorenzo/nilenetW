@@ -14,8 +14,8 @@ const Contact = () => {
    const [msg,setMsg]=useState("");
    const [loader,setLoader] = useState(false);
   //submits information to database
-   const handleSubmit = (e)=> {
-     e.preventDefault();
+   const handleSubmit = ()=> {
+     
 
      setLoader(true);
 
@@ -152,7 +152,7 @@ There are instances when you no longer use or have access to the email address u
       
           <textarea  required="required" placeholder="Message..." value = {msg} onChange={(e) => setMsg(e.target.value)}></textarea><br/>
       
-        <button type="submit"  onSubmit={handleSubmit} style={{background: loader ? "#ccc" : "#fff"}}><FontAwesomeIcon   icon={faUpload} size = "2em"/>Submit</button>
+        <button type="submit"  onClick={()=>handleSubmit()} style={{background: loader ? "#ccc" : "#fff"}}><FontAwesomeIcon   icon={faUpload} size = "2em"/>Submit</button>
       </div> 
 
       </div>

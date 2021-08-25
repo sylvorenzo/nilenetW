@@ -13,16 +13,21 @@ class ResourceScreen extends Component{
                     </Link>
                 </button>
                 <button className="resource-categories">
-                   Required Documentation
-                </button>
-                <button className="resource-categories">
+                    <Link to ='/tools'>
                     Tools for Success
+                    </Link>
+                    
                 </button>
                 <button className="resource-categories">
+                    <Link to='/copyright'>
                     Copyright and Intellectual Property
+                    </Link>
+                    
                 </button>
                 <button className="resource-categories">
+                    <Link to='/register'>
                     How to Register Your Business
+                    </Link>
                 </button>
             </div>
         )

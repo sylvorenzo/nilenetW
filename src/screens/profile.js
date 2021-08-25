@@ -26,8 +26,8 @@ function ProfileScreen(){
 
 // deletes posts
 function deleteContent(projectId){
-    fire.database().ref(`posts/entrepreneurs/${fire.auth().currentUser.uid}`).child(projectId).remove().then(alert('Content successfully deleted'));
-    fire.database().ref(`public/posts/entrepreneurs`).child(projectId).remove();
+    fire.database().ref(`posts/${fire.auth().currentUser.uid}`).child(projectId).remove().then(alert('Content successfully deleted'));
+    fire.database().ref(`public/posts/`).child(projectId).remove();
 }
     // displays side drawer
    const drawerToggleClickHandler = ()=>{
@@ -44,7 +44,7 @@ function deleteContent(projectId){
  //listens for changes
    useEffect(()=>{
        // retreives entrepreneur data and stores it in a state.
-       fire.database().ref(`users/entrepreneurInfo/${fire.auth().currentUser.uid}`).on('value', snapshot =>{
+       fire.database().ref(`users/${fire.auth().currentUser.uid}`).on('value', snapshot =>{
            if(snapshot.exists()){
                 let Items = snapshot.val();
                 let newItems = [];
@@ -132,7 +132,7 @@ function deleteContent(projectId){
        }
 
 
-    fire.database().ref(`users/entrepreneurInfo/${fire.auth().currentUser.uid}`).on('value', snapshot =>{
+    fire.database().ref(`users/${fire.auth().currentUser.uid}`).on('value', snapshot =>{
         if(snapshot.exists()){
             let Items = snapshot.val();
             let newItems = [];
@@ -203,19 +203,9 @@ function deleteContent(projectId){
                     })}
                     <h7>{type}</h7><br/>
         
-   
-                 
-
-
-                   <button className="profile-btn">
-                       Followers
-                   </button>
-                   <button className="profile-btn">
-                       Following
-                   </button>
                    <button className="profile-btn">
                        <NavLink to='/chat'>
-                        Message
+                        Contacts
                        </NavLink>
   
                    </button>

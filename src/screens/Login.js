@@ -57,6 +57,37 @@ const InvestorLogin =()=>{
                         placeholder='Insert Email'
                         /><br/>
                         <p>{errors.email}</p>
+                        <input type = "text" 
+                        autoFocus
+                        className= "box-input"
+                        required 
+                        value={values.username} 
+                        name ="email"
+                        onChange = {handleChange}
+                        placeholder='Insert Email'
+                        /><br/>
+                        <p>{errors.username}</p>
+                        <input type = "text" 
+                        autoFocus
+                        className= "box-input"
+                        required 
+                        value={values.surname} 
+                        name ="email"
+                        onChange = {handleChange}
+                        placeholder='Insert Email'
+                        /><br/>
+                        <p>{errors.surname}</p>
+                        <select className="box-select"
+                            name="type"
+                            value={values.sectorOfBusiness}
+                            onChange={handleChange}
+                        >
+                            <option></option>
+                            <option value="tourism">Tourism</option>
+                            <option value= "maufacturing">Manufacturing</option>
+                            <option value= "agriculture">Agriculture</option>
+                            <option value= "finances">Finances</option>
+                        </select><br/>   
                         <select className="box-select"
                             name="type"
                             value={values.type}

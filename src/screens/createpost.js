@@ -63,6 +63,7 @@ const CreatePostScreen = ()=>{
               projectStatus: values.projectStatus,
               projectDescription: values.projectDescription,
               username: items[0].username,
+              surname:items[0].surname,
               profileImage: items[0].profileImage
             }).then(()=>{
               alert("Post successfully created")
@@ -76,6 +77,7 @@ const CreatePostScreen = ()=>{
               uid: current.uid,
               projectDescription: values.projectDescription,
               username: items[0].username,
+              surname: items[0].surname,
               profileImage: items[0].profileImage
             })
         
@@ -90,7 +92,7 @@ const CreatePostScreen = ()=>{
    // listens for changes 
  useEffect(()=>{
    //retrieves data from database and stores it in a state
-  fire.database().ref(`users/entrepreneurInfo/${fire.auth().currentUser.uid}`).on('value', snapshot =>{
+  fire.database().ref(`users/${fire.auth().currentUser.uid}`).on('value', snapshot =>{
     if(snapshot.exists()){
       let Items = snapshot.val();
       let newItems = [];
@@ -98,6 +100,7 @@ const CreatePostScreen = ()=>{
     
       newItems.push({
         username: Items.username,
+        surname: Items.surname,
         profileImage: Items.profileImage,    
      });
     }
@@ -125,21 +128,25 @@ const CreatePostScreen = ()=>{
                 className="post-input"
                 placeholder = "Enter Project Name" />
                 <br/>
-                <input 
-                name = "projectStatus"
-                type = "text"
-                onChange ={handleChangeP} 
-                value = {values.projectStatus}
-                className="post-input"
-                placeholder = "Enter Project Status" />
-                <br/>
+                <select
+                  name="projectStatus"
+                  type="text"
+                  value={values.projectStatus}
+                  className="post-input"
+
+                >
+                  <option value="">Select Project Status</option>
+                  <option value="Beginning Stages">Beginning Stages</option>
+                  <option value="Project In Development">Project In Development</option>
+                </select><br/>
+              
                 <textarea
                 name = "projectDescription"
                 type = "text"
                 onChange ={handleChangeP} 
                 value = {values.projectDescription}
                 className="post-textarea"
-                placeholder = "Enter Project Name" />
+                placeholder = "Tell Us more about your Project" />
                 <br/>
                 <button onClick={HandleUpload} className="post-btn">Upload Post</button>
               </div>

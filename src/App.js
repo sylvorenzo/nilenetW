@@ -22,6 +22,9 @@ import financeScreen from './screens/finances';
 import OpportunitiesScreen from './screens/opportunities';
 import InvestorProfileEditScreen from './screens/investorProfileEdit';
 import ChatScreen from './screens/chat';
+import BusinessContent from './screens/businessRegistration';
+import ToolsForSuccess from './screens/tools';
+import CopyrightContent from './screens/copyright';
 
 function App() {
   //calls functions from useForm
@@ -75,6 +78,9 @@ function App() {
             <Route path = '/opportunities' component = {OpportunitiesScreen}/>
             <Route path = '/iprofileEdit' component ={InvestorProfileEditScreen}/>
             <Route path = '/chat' component = {ChatScreen}/>
+            <Route path = '/register' component = {BusinessContent}/>
+            <Route path = '/tools' component = {ToolsForSuccess}/>
+            <Route path = '/copyright' component = {CopyrightContent}/>
           
           </Switch>
            

@@ -108,6 +108,7 @@ componentDidMount(){
                   projectStatus: childsnapshot.projectStatus,
                   projectDescription: childsnapshot.projectDescription,
                   username: childsnapshot.username,
+                  surname: childsnapshot.surname,
                   profileImage: childsnapshot.profileImage,
                   uid: childsnapshot.uid,
               })
@@ -117,7 +118,7 @@ componentDidMount(){
     }
 
     // retrieves entrepreneur data from database
-     fire.database().ref(`users/entrepreneurInfo/${fire.auth().currentUser.uid}`).on('value', snapshot =>{
+     fire.database().ref(`users/${fire.auth().currentUser.uid}`).on('value', snapshot =>{
         if(snapshot.exists()){
             let Items = snapshot.val();
             this.setState({
@@ -128,8 +129,10 @@ componentDidMount(){
            let newItems = [];
            for(let x = 0; x< 1; x++){
                 newItems.push({
-                    username: Items.username,
-                    profileImage: Items.profileImage,
+                username: Items.username,
+                surname:Items.surname,
+                profileImage: Items.profileImage,
+                sectorOfBusiness:Items.sector
                  });
             } 
             this.setState({items: newItems});
@@ -197,7 +200,7 @@ componentDidMount(){
                                     <div style={{overflow:'hidden'}}>
                                     <div style={{display:'inline-block',borderBottom:'0.5px solid black',width:'100%'}}>
                                         <img src={items.profileImage} alt="profile" className="feed-profile"/> 
-                                        <h6 style={{color:'black'}}>{items.username}</h6>
+                                        <h6 style={{color:'black'}}>{items.username} {items.surname}</h6>
                                     </div>
                                     <div >
 
@@ -303,7 +306,7 @@ componentDidMount(){
                     <div className="feed-content" key={index} >
                         {this.state.items.map(item=>{
                             
-                            if(items.username.indexOf(this.state.search)> -1){
+                            if(item.sectorOfBusiness.indexOf(this.state.search)> -1){
                                 return(
                                     <div style={{display:'inline-block',}}>
                                         <div className="feed-banner">

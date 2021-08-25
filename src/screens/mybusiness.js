@@ -61,7 +61,7 @@ const MyBusinessScreen = ()=>{
           // machine options
         const options ={
             task: 'classification',
-            debug: true
+            debug: false
           };
           // create new neural network
          const model = ml5.neuralNetwork(options);
@@ -152,7 +152,7 @@ const MyBusinessScreen = ()=>{
         const current = fire.auth().currentUser;
     
         //stores user input in database
-        db.ref(`users/entrepreneur/${current.uid}`).set({
+        db.ref(`users/entrepreneurs/${current.uid}`).set({
             id: current.uid,
             numberofEmployees: values.numberofEmployees,
             numberofMilestones: values.numberofMilestones,
@@ -189,31 +189,34 @@ const MyBusinessScreen = ()=>{
 
     const db = fire.database();
     const current = fire.auth().currentUser;
-    db.ref(`users/entrepreneur/${current.uid}`).on('value',snapshot=>{
-        let Items = snapshot.val();
-      let newItems = [];
-      for(let x = 0; x< 1; x++){
+    db.ref(`users/entrepreneurs/${current.uid}`).on('value',snapshot=>{
+        if(snapshot.exists()){
+            let Items = snapshot.val();
+            let newItems = [];
+            for(let x = 0; x< 1; x++){
+             
+                  newItems.push({
+                      
+                     
+                      numberofEmployees: Items.numberofEmployees,
+                      numberofMilestones: Items.numberofMilestones,
+                      managementExperience: Items.managementExperience,
+                      relationships: Items.relationships,
+                      TotalcapitalAmount: Items.TotalcapitalAmount,
+                      financialBackground: Items.financialBackground,
+                      numberOfCompetitors: Items.numberOfCompetitors,
+                  });
+          
+            }
+            setDatas(datas = newItems);
+           
+            console.log(datas);
+      
+        }
        
-            newItems.push({
-                
-               
-                numberofEmployees: Items.numberofEmployees,
-                numberofMilestones: Items.numberofMilestones,
-                managementExperience: Items.managementExperience,
-                relationships: Items.relationships,
-                TotalcapitalAmount: Items.TotalcapitalAmount,
-                financialBackground: Items.financialBackground,
-                numberOfCompetitors: Items.numberOfCompetitors,
-            });
-    
-      }
-      setDatas(datas = newItems);
-     
-      console.log(datas);
-
     });
 
-    fire.database().ref(`users/entrepreneurInfo/${fire.auth().currentUser.uid}`).on('value', snapshot =>{
+    fire.database().ref(`users/${fire.auth().currentUser.uid}`).on('value', snapshot =>{
         console.log(snapshot.val());
         let Items = snapshot.val();
        let newItems = [];
@@ -252,8 +255,8 @@ const MyBusinessScreen = ()=>{
         setCharts(charts = newpoints);
 
         console.log(charts);
-        const labels = [];
-        const pointers = [];
+        var labels = [];
+        var pointers = [];
     
     
             labels.push(charts[0].tag1,charts[0].tag2, charts[0].tag3);
@@ -267,13 +270,16 @@ const MyBusinessScreen = ()=>{
 
     });
     console.log(charts);
-    db.ref(`users/entrepreneur/${current.uid}`).on('value', snapshot=>{
-        let items = snapshot.val();
-        let newItems = [];
-        newItems.push({
-            sectorOfBusiness: items.sectorOfBusiness,
-        })
-        setSectorOfBusiness(sectorOfBusiness = newItems);
+    db.ref(`users/entrepreneurs/${current.uid}`).on('value', snapshot=>{
+        if(snapshot.exists()){
+            let items = snapshot.val();
+            let newItems = [];
+            newItems.push({
+                sectorOfBusiness: items.sectorOfBusiness,
+            })
+            setSectorOfBusiness(sectorOfBusiness = newItems);
+        }
+       
     })
     console.log(sectorOfBusiness);
 
