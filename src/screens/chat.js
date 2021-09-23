@@ -28,6 +28,9 @@ class ChatScreen extends Component{
             ProjectPosts: [],
             users:[],
             status:'Follow',
+            token:'',
+            username:'',
+            surname:'',
         }
 
         this.handleSession = this.handleSession.bind(this);
@@ -36,7 +39,12 @@ class ChatScreen extends Component{
     }
 
     componentDidMount(){
-
+      // retrieves parsed users token from database.
+      fire.database().ref(`mykey/${this.state.key}`).once('value', snap=>{
+        if(snap.exists()){
+          this.setState({token:snap.val().token});
+        }
+      })
 
         // retrieves profile information from database.
         fire.database().ref(`contacts/${fire.auth().currentUser.uid}`).on('value', snapshot=>{
@@ -65,11 +73,11 @@ class ChatScreen extends Component{
         
             if(snapshot.exists()){
                 let sessionId = Object.keys(snapshot.val());
-                console.log(sessionId);
+            
                 var extensionArray = [];
             
-                    let messageId = Object.values(sessionId).map(items=>{
-                        console.log(items);
+                    Object.values(sessionId).map(items=>{
+                    
                         fire.database().ref(`chats/${items}/`).on('value', childshot=>{
             
                             Object.values(childshot.val()).map(items=>{
@@ -126,7 +134,7 @@ class ChatScreen extends Component{
   
       });
       //retrieves entrepreneur Information and then stores it into a state.
-  fire.database().ref(`users/entrepreneurInfo`).on('value', snapshot =>{
+  fire.database().ref(`users/`).on('value', snapshot =>{
     
     if(snapshot.exists()){
         let userInfo = snapshot.val();
@@ -152,6 +160,18 @@ class ChatScreen extends Component{
       }    
     }
   });
+  fire.database().ref(`users/${fire.auth().currentUser.uid}`).once('value', snapshot =>{
+    if(snapshot.exists()){
+         const Items = snapshot.val();
+         this.setState({username:Items.username});
+         this.setState({surname:Items.surname});
+         
+         
+         
+        
+    }
+
+});
 
   
 }
@@ -161,15 +181,14 @@ class ChatScreen extends Component{
         const current = fire.auth().currentUser.uid;
 
         this.setState({key: id});
-        console.log(this.state.key);
+   
 
         var key = current + id;
         var altKey = id + current;
         this.setState({conversationkey: key});
         this.setState({alternateConversationkey: altKey});
 
-        console.log(this.state.conversationkey)
-        console.log("clicked");
+      
 
 
 
@@ -213,7 +232,25 @@ class ChatScreen extends Component{
             message: this.state.message,
             time: time,
             uid: CurrentUid
-        })
+        });
+        // Uses cloud messaging API.
+        fetch('https://us-central1-nilenet-c9b39.cloudfunctions.net/user', {
+          method: 'POST',
+          headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            tokens: [this.state.token],
+            notification:{
+              title: `${this.state.username} ${this.state.surname}`,
+              body:this.state.message
+            }
+    
+    
+          })
+        });
+        
       
     }
     //opens a side drawer where user information can be viewed.

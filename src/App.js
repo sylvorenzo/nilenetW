@@ -2,16 +2,13 @@ import React,{useEffect} from 'react'
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import Login from './screens/Login';
 import fire from './screens/fire';
-import FormSignup from './screens/FormSignup';
 import InvestorDetails from './screens/regPage';
 import FeedScreen from './screens/FeedScreen';
 import validate from './screens/validateInfo';
 import useForm from './screens/useForm'
 import Navigation from './screens/Navigation';
-import About from './screens/About';
 import ProfileScreen from './screens/profile';
 import CreatePostScreen from './screens/createpost';
-import Asker from './screens/helpPage';
 import HomeScreen from './screens/Home';
 import MyBusinessScreen from './screens/mybusiness';
 import ResourceScreen from './screens/resources';
@@ -25,6 +22,7 @@ import ChatScreen from './screens/chat';
 import BusinessContent from './screens/businessRegistration';
 import ToolsForSuccess from './screens/tools';
 import CopyrightContent from './screens/copyright';
+import 'firebase/messaging';
 
 function App() {
   //calls functions from useForm
@@ -36,6 +34,8 @@ function App() {
 
 // listens for changes
   const authListener = ()=>{
+   
+   
       fire.auth().onAuthStateChanged((currentuser)=>{
         //console.log(currentuser);
           if(currentuser){
@@ -49,6 +49,29 @@ function App() {
   // listens for changes
   useEffect(()=>{
       authListener();
+     fire.messaging().onMessage(payload=>{
+       console.log('message received: ', payload);
+     });
+     // Get registration token. Initially this makes a network call, once retrieved
+// subsequent calls to getToken will return from cache.
+  fire.messaging().getToken({ vapidKey: 'BCYAk5dwxsnlsXR5c1Mdx-qhzRHnjKUddeca7Q6Y6MFnTBC6P9uWjhPE1VuHT_Vle9tGCoDjhEFm93ZQGQmxGno' }).then((currentToken) => {
+    if (currentToken) {
+      // Send the token to your server and update the UI if necessary
+      console.log('current token: ', currentToken);
+      fire.database().ref(`mykey/${fire.auth().currentUser.uid}`).set({
+        token:currentToken,
+      })
+      // ...
+    } else {
+      // Show permission request UI
+      console.log('No registration token available. Request permission to generate one.');
+      // ...
+    }
+  }).catch((err) => {
+    console.log('An error occurred while retrieving token. ', err);
+    // ...
+  });
+    
   },[])
 
   
@@ -64,12 +87,9 @@ function App() {
             <Route path ='/'  exact component={HomeScreen}/>
             <Route path = '/mybusiness' component = {MyBusinessScreen}/>
             <Route path = '/resources' component ={ResourceScreen}/>
-            <Route path ='/entrepreneur' component={FormSignup}/>
-            <Route path='/about' component={About}/>
             <Route path = '/investor' component={InvestorDetails}/>
             <Route path = '/feed' component={FeedScreen} />
             <Route path = '/profile' component={ProfileScreen} />
-            <Route path = '/help' component={Asker}/>
             <Route path = '/createpost' component ={CreatePostScreen}/>
             <Route path = '/projects' component = {ProjectScreen}/>
             <Route path = '/editprofile' component={EditProfileScreen}/>

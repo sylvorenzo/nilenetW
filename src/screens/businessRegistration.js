@@ -1,8 +1,17 @@
 import React from 'react';
-
+import content from '../assets/content.png';
 export default function BusinessContent(){
-    
+    //how to register your business content page.
     return(
+        <div style={{backgroundColor:'white'}}>
+            <img src={content}   style={{
+                position:'absolute',
+                width:'100%',
+                height: '1800px',
+                backgroundRepeat:'repeat-y',
+                marginTop:'50px'
+            }}
+            />
         <div className="finances-content">
             <h1>How To Register Your Business</h1>
             <h2>Step 1: Create an Account</h2>
@@ -132,5 +141,7 @@ export default function BusinessContent(){
 
 
         </div>
+        </div>
+
     )
 }

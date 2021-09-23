@@ -1,12 +1,14 @@
 import React,{Component} from 'react';
 import { Link } from 'react-router-dom';
+import combination from '../assets/content.png';
 
 
 class ResourceScreen extends Component{
 
     render(){
         return(
-            <div>
+            <div style={{backgroundColor:'white', height:'20px', paddingTop:'10px'}}>
+                <img src={combination} width={1200} height={700} style={{position:'absolute',}} />
                 <button className="resource-categories">
                     <Link to='/finances'>
                         Finances 

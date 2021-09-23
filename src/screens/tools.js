@@ -1,9 +1,23 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
+import content from '../assets/content.png'
 
 export default function ToolsForSuccess(){
 
     return(
-        <div className="finances-content">
+        <div style={{backgroundColor:'white'}}>
+            <img src={content}   style={{
+                position:'absolute',
+                width:'100%',
+                height: '3000px',
+                backgroundRepeat:'repeat-y',
+                marginTop:'50px'
+            }}
+        />
+            <div className="finances-content">
+
+
+
             <h1>Recommended tools for success for SMMES</h1>
             <h2>1.SLACK</h2>
             <p>
@@ -11,7 +25,13 @@ export default function ToolsForSuccess(){
             This means that the days of group messages exploding and generating 
             200 alerts at once are over, as are the days of missing messages addressed 
             at you and several groups mingling on the same setup. 
-            However, communication provides much more than simply this basic capacity.
+            However, communication provides much more than simply this basic capacity. 
+            <p>
+            <Link target="_blank" to={{pathname: 'https://slack.com'}}>
+                Learn more.
+            </Link>
+            </p>
+
             </p>
             <h2>2.GSUITE</h2>
             <p>
@@ -22,6 +42,11 @@ export default function ToolsForSuccess(){
             Keeping all of your company needs centralized around your 
             branded domain and within the 
             Google platform will provide you peace of mind in knowing that everything is taken care of.
+            <p>
+            <Link target="_blank" to={{pathname: 'https://gsuite.google.com'}}>
+                Get Started.
+            </Link>
+            </p>
             </p>
             <h2>3.GOCO</h2>
             <p>
@@ -33,6 +58,11 @@ export default function ToolsForSuccess(){
             resources and benefits platform. Integration with currency payroll and 
             administration software provides the capabilities you want without requiring 
             you to think about it or deal with paperwork.
+            <p>
+            <Link target="_blank" to={{pathname: 'https://www.goco.io'}}>
+                Get Started.
+            </Link>
+            </p>
             </p>
             <h2>4.GoodHire</h2>
             <p>
@@ -43,6 +73,11 @@ export default function ToolsForSuccess(){
             no paperwork and only a few taps on your smartphone. Furthermore, they provide 
             findings in less than 24 hours. Expanding your workforce may be easy, 
             and it can help your business to function more smoothly than ever before.
+            <p>
+            <Link target="_blank" to={{pathname: 'https://www.goodhire.com'}}>
+                Get Started.
+            </Link>
+            </p>
             </p>
             <h2>5.Upwork</h2>
             <p>
@@ -53,6 +88,11 @@ export default function ToolsForSuccess(){
             Upwork is certain to have someone who can help you build your business. 
             Their review, bidding, and reference system 
             gives you peace of mind when it comes to evaluating anybody you want to deal with.
+            <p>
+            <Link target="_blank" to={{pathname: 'https://www.upwork.com'}}>
+                Get Started.
+            </Link>
+            </p>
             </p>
             <h2>6.Quora</h2>
             <p>
@@ -63,6 +103,11 @@ export default function ToolsForSuccess(){
             This implies that anytime you or your company has a query about something 
             outside of your field of expertise, 
             you'll almost certainly be able to locate an expert to answer your question on Quora.
+            <p>
+            <Link target="_blank" to={{pathname: 'https://www.quora.com'}}>
+                Get Started.
+            </Link>
+            </p>
             </p>
             <h2>7.Telzio</h2>
             <p>
@@ -72,6 +117,11 @@ export default function ToolsForSuccess(){
             manage, and maintain a phone system for their 
             employees, thanks to a clear and intuitive online interface, 
             simple pricing, and no lock-in or termination costs.
+            <p>
+            <Link target="_blank" to={{pathname: 'https://telzio.com'}}>
+                Get Started.
+            </Link>
+            </p>
             </p>
             <h2>8.Intercom</h2>
             <p>
@@ -81,6 +131,11 @@ export default function ToolsForSuccess(){
             a lack of knowledge of problems and wants, and a negative user experience. 
             Intercom provides a range of features for your web customers, including live chat, 
             education, and more, making it simpler to interact, engage, and communicate with them.
+            <p>
+            <Link target="_blank" to={{pathname: 'https://www.intercom.com'}}>
+                Get Started.
+            </Link>
+            </p>
             </p>
             <h2>9.SalesLoft</h2>
             <p>
@@ -90,6 +145,11 @@ export default function ToolsForSuccess(){
             and deep connections with the technologies you're already using like Salesforce, 
             their platform improves the productivity and effectiveness of salespeople. 
             Overall, SalesLoft aids in the conversion and retention of customers.
+            <p>
+            <Link target="_blank" to={{pathname: 'https://salesloft.com'}}>
+                Get Started.
+            </Link>
+            </p>
             </p>
             <h2>10.Trello</h2>
             <p>
@@ -101,6 +161,11 @@ export default function ToolsForSuccess(){
             Trello offers a range of options and getting started on Trello may be free for 
             individuals and small teams, 
             with cost increasing gradually based on how quickly the organization expands.
+            <p>
+            <Link target="_blank" to={{pathname: 'https://trello.com'}}>
+                Get Started.
+            </Link>
+            </p>
             </p>
             <h2>11.Blinkist</h2>
             <p>
@@ -123,6 +188,11 @@ export default function ToolsForSuccess(){
             You'll get access to over 3000 book summaries in over 27 categories, 
             ranging from politics to entrepreneurship and small company.
             Blinkist Premium is available for a 7-day free trial.
+            <p>
+            <Link target="_blank" to={{pathname: 'https://www.blinkist.com'}}>
+                Get Started.
+            </Link>
+            </p>
             </p>
             <h2>12.Wix</h2>
             <p>
@@ -147,7 +217,13 @@ export default function ToolsForSuccess(){
             <li>
             This website builder now includes mobile responsive site choices, 
             ensuring that your site looks amazing on any device.
+
             </li>
+            <p>
+            <Link target="_blank" to={{pathname: 'https://www.wix.com'}}>
+                Get Started.
+            </Link>
+            </p>
             <h2>3.MoneyVersity</h2>
             <p>
             We've mentioned some business-related applications, but your personal money may also require care.
@@ -164,6 +240,11 @@ export default function ToolsForSuccess(){
             This tool provides a range of courses and subjects to assist you 
             in better understanding your money.
             </li>
+            <p>
+            <Link target="_blank" to={{pathname: 'https://www.moneyversity.co.za'}}>
+                Get Started.
+            </Link>
+            </p>
             <h2>14.Google Analytics</h2>
             <p>
             You may use Google Analytics to track the traffic to your website for free. 
@@ -179,6 +260,13 @@ export default function ToolsForSuccess(){
             When you start utilizing SEO tactics, you can track how much traffic is flowing to your 
             sites and whether or not your SEO is functioning appropriately.
             </li>
+            <p>
+            <Link target="_blank" to={{pathname: 'https://analytics.google.com'}}>
+                Get Started.
+            </Link>
+            </p>
+            </div>
         </div>
+        
     )
 }

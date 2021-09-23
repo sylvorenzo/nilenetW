@@ -142,7 +142,7 @@ const useForm = (callback, validate) => {
 
   //handles the sign up functionality
   const handleSignup = ()=>{
-    validateInfo(values.username,values.email,values.companyName,values.password,values.password2);
+    
     
     fire.auth().createUserWithEmailAndPassword(values.email,values.password).then(
       ()=>{

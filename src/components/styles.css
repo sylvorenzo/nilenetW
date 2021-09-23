@@ -1,8 +1,113 @@
 body{
-    background-image: url(../assets/Welcome.png);
-    font-family: Arial, Helvetica, sans-serif;
+     background-image: url(../assets/bg.jpg);
+     background-size: cover;
+
+    /* background-blend-mode:screen; */
+    font-family:  sans-serif;
+    
 
 }
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+
+}
+
+/* Login page */
+.login-wrapper
+{
+height: 100vh;
+width: 100vh;
+display: flex;
+justify-content:center;
+align-items: center;
+}
+
+.form{
+    position: relative;
+    width: 100%;
+    max-width:380px ;
+    padding:80px 40px 40px;
+    background:rgba(0,0,0,0.7);
+    border-radius: 10px;
+    color:#fff;
+    box-shadow:0 15px 25px rgba(0,0,0,0.5);
+
+}
+
+.form::before
+{
+    content: "";
+    position: absolute;
+    top: 0;
+    left:0;
+    width: 50%;
+    height:100%;
+    background: rgba(255,255,255,0.08);
+    border-radius: 10px;
+    pointer-events: none;
+
+}
+
+.form img {
+    position: absolute;
+    top:-50px;
+    left:calc(50% - 50px);
+    width: 100px;
+    background:rgba(255,255,255,0.8);
+    border-radius: 50%;
+
+}
+
+.form h2
+{
+text-align: center;
+letter-spacing: 1px;
+margin-bottom: 2rem;
+color: #ff652f;
+}
+
+.form .input-group
+{
+    position: relative;
+
+}
+
+.form .input-group input
+{
+    width:100%;
+    padding:10px 0;
+    font-size: 1rem;
+    letter-spacing: 1px;
+    margin-bottom: 30px;
+    border:none;
+    border-bottom: 1px solid #fff;
+    outline:none;
+    background-color: transparent;
+    color: inherit;
+}
+
+.form .input-group label
+{
+    position: absolute;
+    top:0;
+    left:0;
+    padding:10px;
+    font-size: 1rem;
+    pointer-events: none;
+    transition: .3s ease-out;
+}
+
+.form .input-group input:focus + label,
+.form .input-group input:valid + label{
+    transform: translateY(-18px);
+    color: #ff652f;
+    font-size: .8rem;
+}
+
+
 
 /* Beginning of  Landing page styling**/
 .logo-img{
@@ -37,7 +142,7 @@ body{
 /* Beginning of sign up styling */
 
 .box{
-    background-color: white;
+    background-color:rgb(230, 180, 81);
     padding-top: 50px;
     width: 460px;
     height: 580px;
@@ -46,6 +151,8 @@ body{
     justify-content: center;
     text-align: center;
     box-shadow: 10px 20px lightgray;
+    border-radius:25px ;
+    
 }
 .box-select{
     outline: none;
@@ -64,38 +171,58 @@ body{
     padding: 12px 20px;
 }
 .box-btn{
-    background-color: orange;
-    text-decoration: none;
-    width: 150px;
-    height: 50px;
-    margin-left: 50%;
-    margin-bottom: 50px;
-    border-radius: 25px;
-    border-color: orange;
-    outline: none;
-    border: orange;
+
+    display: block;
+  margin-left: auto;
+  border: none;
+  outline: none;
+  background: #ff652f;
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  
 }
+
+.box-btn:hover{
+    background-color: teal;
+}
+
 .box-span{
-    color: #098bdb;
+    color: orangered;
 }
 .box-span:hover{
-    color: orange;
+    color: teal;
 }
 /* End of Sign Up styling */
 
 /* Beginning of Nav bar styling */
 
 .navbar{
-    background-color: white;
-    height: 100px;
+    background-color :white;
+    height: 80px;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    /* clip-path:circle(100px at 90% -10%) ;
+    transition: all 1s ease-out; */
 
 }
 .nav-logo{
     width: 90px;
 }
+
+.container-fluid{
+    margin: 0;
+}
 .nav-link{
+    /* margin-left: 2rem;
+    font-size: 2rem; */
     background-color: white;
     color: black;
+    padding-top: 1rem;
 }
 .nav-image{
     width: 40px;
@@ -104,16 +231,33 @@ body{
     border-radius: 50%;
     margin-right: 20px;
 }
+
 .navigation-items{
     display: inline-block;
     text-decoration: none;
+
     color: black;
     width: 100%;
-    border-bottom: 0.5px solid black;
+    padding-top: 1rem;
+    /* border-bottom: 0.5px solid;  */
 }
-.navigation-items h8:hover, h7:hover,h6:hover{
+
+.navigation-items :hover{
+   
+      background-color:rgb(211, 210, 210);
+      border-radius: 5px;
+}
+
+.navigation-items h8:hover, h7:hover{
+    color: orange; 
+  
+}
+
+.nav-item2 :hover{
     color: orange;
 }
+
+
 .navbar-side{
 
     height: 100%;
@@ -163,16 +307,16 @@ body{
     background-color: white;
 }
 .terms-btn{
-    background-color: orange;
+    background-color:#f85900;
     text-decoration: none;
     width: 150px;
     height: 50px;
     margin-left: 70%;
     margin-bottom: 50px;
     border-radius: 25px;
-    border-color: orange;
+    border-color:#f85900;
     outline: none;
-    border: orange;
+    border: #f85900;
     color: white;
 }
 /* END of terms and conditions styling */
@@ -183,6 +327,7 @@ body{
     background-color: white;
 
 }
+
 /* End of Home Page styling */
 
 /* Beginning of business Page styling */
@@ -213,10 +358,11 @@ body{
 .business-cards{
     background-color: white;
     border: 2px solid black;
-    margin-right: 70px;
+    margin-left: 200px;
     margin:20px;
     border-radius: 20px;
     height: 260px;
+    width: 550px;
     padding-top: 50px;
     box-shadow: 12px 10px black;
     padding-left: 20px;
@@ -263,6 +409,7 @@ body{
     border: 2px solid orange;
     background-color: white;
     box-shadow: 10px 20px lightgray;
+    position: relative;
 }
 /* End of Resources page styling */
 
@@ -298,11 +445,13 @@ body{
 }
 .feed-input{
     width: 400px;
+    margin-top: 400px;
     height: 60px;
     border-radius: 30px;
     text-align: center;
     outline: none;
     border: 2px solid orange;
+    position: absolute;
 }
 .feed-content{
     margin-top: 50px;
@@ -311,10 +460,11 @@ body{
     margin-right: 20px;
     background-color: white;
     display: -webkit-inline-box;
+    border-radius: 25px;
     position: relative;
 }
 .feed-profile{
-    float: inline-start;
+    float: left;
     margin: 5px;
     width: 50px;
     height: 50px;
@@ -334,24 +484,28 @@ body{
 
 }
 .feed-banner{
+    
+    float: right;
     width: 100%;
-    background-color: black;
-    color: white;
+    color: black;
 }
 .feed-gradient{
     margin-right: 50px;
-    margin-top: 100px;
+    margin-left: 65px;
+    align-self: center;
+    margin-top: 565px;
     float: right;
     width: 90%;
     height: 50px;
-    background-color: white;
+    position: absolute;
+    background-color: #f85900;
 }
 .feed-gradient-footer{
     margin-right: 50px;
     float: right;
     width: 90%;
     height: 50px;
-    background-color: white;
+    background-color: #f85900;
 }
 /* End of Feed page styling */
 
@@ -395,9 +549,10 @@ body{
     margin: 20px;
     width: 200px;
     height: 50px;
-    background-color: orange;
-    border: 2px solid orange;
+    background-color: #f85900;
+    border: 2px solid #f85900;
     text-decoration: none;
+    border-radius: 5px;
     color: white;
 }
 .profile-btn:hover{
@@ -448,7 +603,7 @@ body{
 }
 .file-btn{
     content: 'select image';
-    background-color: orange;
+    background-color: #f85900;
     color: white;
     text-align: center;
     padding-top: 10px;
@@ -471,14 +626,15 @@ body{
 .post-btn{
     margin: 10px;
     border-radius: 25px;
-    background-color: orange;
+    width: 200px;
+    background-color: #f85900;
     color: white;
     height: 50px;
-    border: 2px solid orange;
+    border: 2px solid #f85900;
     outline: none;
 }
 .post-input{
-    border: 2px solid orange;
+    border: 2px solid #f85900;
     border-top: none;
     border-left: none;
     border-right: none;
@@ -507,7 +663,7 @@ body{
     position: fixed;
     top: 0;
     right: 0;
-    width: 85%;
+    width: 60%;
     z-index: 200;
     box-shadow: 1px 0px 7px rgba(0,0,0,0.5); 
     transform: translateX(100%);
@@ -590,8 +746,8 @@ body{
     height: 69px;
     padding-top: 20px;
     color: white;
-    background-color: black;
-    border-bottom: solid 2px black;
+    background-color:#ff6400;
+    /* border-bottom: solid 2px black; */
 }
 .profileView-back{
     float: left;
@@ -602,7 +758,7 @@ body{
     margin-top: 20px;
 }
 .profileView-icon:hover{
-    color: orange;
+    color: black;
 }
 .profileView-followerSection{
     width: 100%;
@@ -689,40 +845,128 @@ body{
 /*Ending of View profile screen*/
 
 /*Beginning of home styling*/
+.resource-body{
+
+    width: 1150px;
+    height: 100vh;
+    display: -webkit-inline-box;
+    align-items: center;
+
+    overflow-y: hidden;
+
+}
+
+.resource-body2{
+
+    width: 100vw;
+    height: 100vh;
+
+    align-items: center;
+    position: relative;
+}
+
 .home-content{
-    background-color: orange;
-    color: white;
-    height: fit-content;
-}
-.resources-section{
-    width: 100%;
-    height: 300px;
-    float: left;
-    border-left: none;
-    border-right: none;
-    border-bottom: 2px solid black;
+  
+    background: inherit;
+    margin: 2rem;
+    gap:1rem;
+    display: grid;
+    grid-template-columns: 300px;
+    grid-template-rows: 210px 210px 80px;
+    grid-template-areas: "image" "text" "stats";
+    font-family: roboto;
+    border-radius: 18px;
+    background: white;
+    box-shadow: 5px 5px 15px rgba(0,0,0,0.9);
     text-align: center;
-    color: black;
-    background-color: white;
-    overflow: hidden;
+    transition: 0.5s ease;
+    cursor: pointer;
 }
-.resources-section1{
-    width: 100%;
-    height: 300px;
-    float: right;
-    border-left: none;
-    border-right: none;
-    border-bottom: 2px solid white;
-    text-align: center;
-    background-color: black;
+
+
+.resources-sectionR{
+    grid-area: image;
+    background: url("../assets/resources.png");
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    background-size: cover;
 }
+.resources-sectionF{
+    grid-area: image;
+    background: url("../assets/feed.png");
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    background-size: cover;
+}
+
+.resources-sectionO{
+    grid-area: image;
+    background: url("../assets/opportunites.png");
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    background-size: cover;
+}
+
+.resources-sectionM{
+    grid-area: image;
+    background: url("../assets/mybusiness.png");
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    background-size: cover;
+}
+
+.resources-sectionS{
+    grid-area: image;
+    background: url("../assets/support.png");
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    background-size: cover;
+}
+
+.resources-sectionP{
+    grid-area: image;
+    background: url("../assets/profile.png");
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    background-size: cover;
+}
+
+
+
+
+.resources-content p{
+    color: grey;
+    font-size: 15px;
+    font-weight: 300;
+}
+.resources-content h2{
+    margin-top: 0px;
+    font-size: 28px;
+}
+
+
 .resources-content{
-    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-    text-align: left;
-    padding-left: 10px;
-    float: left;
-    width: 60%;
+ 
+    background: inherit;
+    grid-area: text;
+    margin: 25px;
+    flex-grow:1;
 }
+
+.nav-link{
+    grid-area: stats;
+    display: grid;
+    /* clip-path: circle(100px at 90% - 10%);
+    transition: all 1s ease-out; */
+}
+
+.home-content:hover{
+    transform: scale(1.2);
+    box-shadow: 5px 5px 15px rgba(0,0,0,0.6);
+
+}
+
+
 .section-images{
     float: right;
     width: 40%;
@@ -732,9 +976,9 @@ body{
 }
 .finances-content{
     width: 100%;
-    border-top: 1px solid black;
     padding: 50px;
-    background-color: white;
+    position: relative;
+
 }
 .finances-iframe{
     width: 300px;
@@ -748,7 +992,9 @@ body{
 }
 
 .Opportunities-section{
-    margin-top: 200px;
+    margin-top: 300px;
+    position: relative;
+    background-color: orange;
 
 }
 .opportunities-content{
@@ -758,15 +1004,18 @@ body{
     float: left;
     width: 50%;
     color: black;
+    border-top: 1px solid orange;
     background-color: white;
 }
 .opportunities-links{
+    padding-top: 3px;
     margin-top: 50px;
     float: right;
     height: 350px;
     width: 50%;
-    color: white;
-    background-color: black;
+    color:black;
+    border-top: 1px solid orange;
+
 }
 .opportunities-categories{
 
@@ -796,9 +1045,9 @@ body{
     min-height: 50px;
     max-width: 50%;
     max-height: auto;
-    background-color: white;
+    background-color: black;
     margin-bottom: 20px;
-    color: black;
+    color: white;
     padding-top: 10px;
     padding-left: 5px;
     padding-right: 5px;
@@ -834,7 +1083,7 @@ body{
     width: 98%;
     height: 380px;
     padding-top: 20px;
-    background-image: url('../assets/Welcome.png');
+    background-image: url('../assets/bg.jpg');
     background-size: 100%;
     justify-content: center;
     background-color: rgba(0, 0, 0, 1);
@@ -869,6 +1118,11 @@ body{
    background-color: orange;
     
 }
+.decorative{
+    height: 200px;
+    background-color: orange;
+    border-bottom-right-radius: 50px;
+}
 .contacts-section{
     float: left;
     border-top: 0.5px solid black;
@@ -884,6 +1138,7 @@ body{
     text-align: center;
    
 }
+
 .contact{
     display: inline-block;
     margin-top: 5px;
@@ -932,3 +1187,17 @@ body{
     height: 100px;
     text-align: center;
 }
+
+
+.card_img{
+height: 30px;
+width: 30px;
+}
+
+/* @media screen and (min-width:600px) {
+    .home-content{
+        grid-template-columns:repeat(auto-fit,minmax(14rem,16rem));  
+    }
+
+    .
+} */

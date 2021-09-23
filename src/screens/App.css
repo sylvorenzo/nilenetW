@@ -7,7 +7,7 @@
   border-radius: 5px;
   overflow: hidden;
   font-family: "Quicksand", sans-serif;
-  background: #009578;
+  background: orange;
   align-content: center;
   align-self: center;
   align-items: center;
@@ -68,14 +68,15 @@
 .faq
 {
     position: relative;
-    min-height:200vh;
+    
+    min-height:200px;
     padding:50px 100px;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    background-color: white;
-    border-top: 0.5px solid black;
+    background-color:whites
+    
 }
 
 * {
@@ -101,7 +102,7 @@
     margin-left: 20px;
 }
 .contact-section h3{
-    color: lightskyblue;
+    color: orange;
 }
 .container{
     margin-left: 50%;

@@ -1,7 +1,9 @@
 import React,{Component} from 'react';
 import fire from './fire';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import {faArrowCircleLeft, faArrowCircleRight} from '@fortawesome/free-solid-svg-icons'
+import {faArrowCircleLeft, faArrowCircleRight,faChartArea, faCommentDots} from '@fortawesome/free-solid-svg-icons'
+import combination from '../assets/PROJECTS.png';
+
 
 class ProjectScreen extends Component{
 
@@ -22,7 +24,8 @@ class ProjectScreen extends Component{
             profileImage:'',
             message:'',
             ChatID:'',
-            thisU: `${fire.auth().currentUser.uid}`
+            thisU: `${fire.auth().currentUser.uid}`,
+            projectId:''
 
         }
         //bind this to functions
@@ -37,7 +40,7 @@ class ProjectScreen extends Component{
 
     }
     // sends message to the database.
-    handleMessage(e,parsedUid){
+    handleMessage(){
         const CurrentUid = fire.auth().currentUser.uid;
             
         let sessionId = CurrentUid + this.state.uid;
@@ -73,14 +76,73 @@ class ProjectScreen extends Component{
             message: this.state.message,
             time: time,
             uid: CurrentUid
-        })
+        });
+        fetch('https://us-central1-nilenet-c9b39.cloudfunctions.net/user', {
+            method: 'POST',
+            headers: {
+              Accept: 'application/json',
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+              tokens: [this.state.token],
+              notification:{
+                title: `${this.state.username} ${this.state.surname}`,
+                body:this.state.message
+              }
+      
+      
+            })
+          });
        
     }
     // handles and opens first side drawer
-    drawerToggleClickHandler = (projectId) => {
+    drawerToggleClickHandler = (uid, projectId) => {
         this.setState({drawerOpen: !this.state.drawerOpen});
         this.setState({drawerClasses: 'side-drawer open'});
-        this.setState({uid: projectId});
+        this.setState({uid: uid});
+        this.setState({projectId: projectId});
+                // retrieves chat information and stores it into a state variable.
+        fire.database().ref(`chats/${fire.auth().currentUser.uid + this.state.uid}/`).on('value', childshot=>{
+            console.log('childshot: ', childshot.val());
+        if(childshot.exists()){
+        const keys = Object.keys(childshot.val());
+            const messageArray = [];
+        keys.sort();
+        for(let x = 0; x < keys.length;x++){
+            
+            fire.database().ref(`chats/${fire.auth().currentUser.uid + this.state.uid}/${keys[x]}`).on('value', snap=>{
+            if(snap.exists()){
+                
+                var data = {
+                chatUid: snap.val().chatUid,
+                time:snap.val().time,
+                message: snap.val().message,
+                uid: snap.val().uid,
+                messagId: snap.val().messageId,
+                }
+                messageArray[x] = data;
+                
+                
+                
+            }
+            this.setState({Messages: messageArray});
+
+            })
+            
+            
+
+            
+        
+        }
+        
+            
+        
+        
+            
+        }
+
+        
+        })
     }
     // closes side drawer
     backdropClickHandler=()=>{
@@ -90,7 +152,11 @@ class ProjectScreen extends Component{
 
 // listens for changes
 componentDidMount(){
-
+    fire.database().ref(`mykey/${this.state.uid}`).once('value', snap=>{
+        if(snap.exists()){
+          this.setState({token:snap.val().token});
+        }
+      })
 
     const current = fire.auth().currentUser.uid;
 // retrieves posts from database
@@ -121,6 +187,8 @@ componentDidMount(){
      fire.database().ref(`users/${fire.auth().currentUser.uid}`).on('value', snapshot =>{
         if(snapshot.exists()){
             let Items = snapshot.val();
+            this.setState({username: snapshot.val().username});
+            this.setState({surname:snapshot.val().surname})
             this.setState({
                 username: Items.username,
                 profileImage: Items.profileImage
@@ -140,39 +208,48 @@ componentDidMount(){
 
     });
     
-    // retrieves chats from database
-    fire.database().ref(`chats/`).on('value', snapshot=>{
-        if(snapshot.exists()){
-            let sessionId = Object.keys(snapshot.val());
-            console.log(sessionId);
-            var extensionArray = [];
+   // retrieves chat information and stores it into a state variable.
+   fire.database().ref(`chats/${fire.auth().currentUser.uid + this.state.uid}/`).on('value', childshot=>{
+       console.log('childshot: ', childshot.val());
+    if(childshot.exists()){
+      const keys = Object.keys(childshot.val());
+        const messageArray = [];
+      keys.sort();
+      for(let x = 0; x < keys.length;x++){
+        
+        fire.database().ref(`chats/${fire.auth().currentUser.uid + this.state.uid}/${keys[x]}`).on('value', snap=>{
+          if(snap.exists()){
+            
+            var data = {
+              chatUid: snap.val().chatUid,
+              time:snap.val().time,
+              message: snap.val().message,
+              uid: snap.val().uid,
+              messagId: snap.val().messageId,
+            }
+            messageArray[x] = data;
+            
+            
+            
+          }
+        this.setState({Messages: messageArray});
+
+        })
+          
+        
+
+       
+      
+      }
+      
+        
+      
      
-                let messageId = Object.values(sessionId).map(items=>{
-                    console.log(items);
-                    fire.database().ref(`chats/${items}/`).on('value', childshot=>{
+        
+    }
 
-                        Object.values(childshot.val()).map(items=>{
-                            console.log(items.message);
-                            let messages = [];
-                            messages.push({
-                                chatUid: items.chatUid,
-                                message: items.message,
-                                time: items.time,
-                                messageId: items.messageId,
-                                uid: items.uid
-                            })
-                            extensionArray = [...extensionArray, messages];
-                            this.setState({Messages: extensionArray});
-                        })
-                   
-
-                    
-                
-                    })
-                });
-        }        
-
-    })
+      
+  })
     
         
  
@@ -181,7 +258,7 @@ componentDidMount(){
     }
     render(){
         return(
-        <div>
+        <div style={{backgroundColor: 'white',paddingTop:'10px',height:'1500px'}}>
             <div show={this.state.drawerOpen}   className={this.state.drawerClasses}>
                 <div className="profileView-TopSection">
                     <div className="profileView-back">
@@ -195,90 +272,93 @@ componentDidMount(){
                     <div>
                         {this.state.Posts.map(items=>{
                             if(items.uid === this.state.uid){
-
-                                return(
-                                    <div style={{overflow:'hidden'}}>
-                                    <div style={{display:'inline-block',borderBottom:'0.5px solid black',width:'100%'}}>
-                                        <img src={items.profileImage} alt="profile" className="feed-profile"/> 
-                                        <h6 style={{color:'black'}}>{items.username} {items.surname}</h6>
-                                    </div>
-                                    <div >
-
+                                if(items.projectId === this.state.projectId){
+                                    return(
+                                        <div style={{overflow:'hidden'}}>
+                                        <div style={{display:'inline-block',borderBottom:'0.5px solid black',width:'100%'}}>
+                                            <img src={items.profileImage} alt="profile" className="feed-profile"/> 
+                                        <h6 style={{color:'black',paddingTop:'15px', marginLeft:'10px'}}>{items.username} {items.surname}</h6>
                                         </div>
-                                        <div className="message-container">
-                                            {this.state.Messages.map(item=> item.map(text=>{
-                                                if(text.chatUid === (this.state.thisU + this.state.uid )){
-                                                    if(text.uid === this.state.thisU){
-                                                        return(
-                                                            <div className="messageReceiver" key={this.state.thisU}>
-                                                                <div className="messageReceiverR">
-                                                                    <p>
-                                                                        {text.message}
-                                                                        <h10
-                                                                        style={{float:'right',
-                                                                                paddingRight:'10px'    
-                                                                            }}
-                                                                        ><br/>
-                                                                            {text.time}
-                                                                        </h10>
-                                                                    
-                                                                    </p>
+                                        <div >
+    
+                                            </div>
+                                            <div className="message-container">
+                                                {this.state.Messages.map(text=>{
+                                                    console.log('text: ', text.chatUid)
+                                                    if(text.chatUid === (this.state.thisU + this.state.uid )){
+                                                        if(text.uid === this.state.thisU){
+                                                            return(
+                                                                <div className="messageReceiver" key={this.state.thisU}>
+                                                                    <div className="messageReceiverR">
+                                                                        <p>
+                                                                            {text.message}
+                                                                            <h10
+                                                                            style={{float:'right',
+                                                                                    paddingRight:'10px'    
+                                                                                }}
+                                                                            ><br/>
+                                                                                {text.time}
+                                                                            </h10>
+                                                                        
+                                                                        </p>
+                                                                    </div>
                                                                 </div>
-                                                            </div>
-                                                        )
-                                                    }
-                                                }else if(text.chatUid ===(this.state.uid + this.state.thisU)){
-                                                    if(text.uid === this.state.uid){
-                                                        return(
-                                                            <div className="messageSender">
-                                                                <div className="messageReceiverS">
-                                                                    <p>
-                                                                        {text.message}
-                                                                        <h10
-                                                                            style={{paddingLeft:'10px'}}
-                                                                        ><br/>
-                                                                            {text.time}
-                                                                        </h10>
-                                                                    </p>
+                                                            )
+                                                        }
+                                                    }else if(text.chatUid ===(this.state.uid + this.state.thisU)){
+                                                        if(text.uid === this.state.uid){
+                                                            return(
+                                                                <div className="messageSender">
+                                                                    <div className="messageReceiverS">
+                                                                        <p>
+                                                                            {text.message}
+                                                                            <h10
+                                                                                style={{paddingLeft:'10px'}}
+                                                                            ><br/>
+                                                                                {text.time}
+                                                                            </h10>
+                                                                        </p>
+                                                                    </div>
                                                                 </div>
-                                                            </div>
-                                                        )
+                                                            )
+                                                        }
                                                     }
-                                                }
-
-
-                                            
-                                    
-                                            }))}
+    
+    
+                                                
+                                        
+                                                })}
+                                            </div>
+                                            <footer className="message-footer">
+                                                <h5>
+                                                <input
+                                                id="message"
+                                                className="message-input"
+                                                autoComplete= "off"
+                                                type="text"
+                                                name="message"
+                                                placeholder="Type a message"
+                                                onChange={this.handleChange}
+                                                value={this.state.value}
+    
+                                                /> <h3 
+                                                        className="message-btn"
+                                                        onClick={(e)=>this.handleMessage(e,this.state.uid)}
+                                                        ><FontAwesomeIcon 
+                                                        icon={faArrowCircleRight} 
+                                                        size="2x" 
+                                                        color="black"
+                                                        
+                                                        />
+                                                    </h3>
+                                                </h5>
+                                            </footer>
+                                        
                                         </div>
-                                        <footer className="message-footer">
-                                            <h5>
-                                            <input
-                                            id="message"
-                                            className="message-input"
-                                            autoComplete= "off"
-                                            type="text"
-                                            name="message"
-                                            placeholder="Type a message"
-                                            onChange={this.handleChange}
-                                            value={this.state.value}
-
-                                            /> <h3 
-                                                    className="message-btn"
-                                                    onClick={(e)=>this.handleMessage(e,this.state.uid)}
-                                                    ><FontAwesomeIcon 
-                                                    icon={faArrowCircleRight} 
-                                                    size="2x" 
-                                                    color="black"
-                                                    
-                                                    />
-                                                </h3>
-                                            </h5>
-                                        </footer>
-                                    
-                                    </div>
-                                    
-                                )
+                                        
+                                    )
+                                }
+                               
                             }
                         })}
                     </div>
@@ -286,6 +366,7 @@ componentDidMount(){
                 </div>
 
             </div>
+            <img src={combination} width={1200} height={600}  style={{pointerEvents:'none', position:'absolute'}}/>
             <div className="feed-search">
                 <input type="text" 
                 className="feed-input" 
@@ -298,39 +379,68 @@ componentDidMount(){
             <div className="feed-gradient">
 
             </div>
-        <div className="feed-container" >
+        <div className="feed-container" style={{marginTop:'600px'}}>
         {this.state.Posts.map((items, index) =>{
 
             return(
 
                     <div className="feed-content" key={index} >
                         {this.state.items.map(item=>{
-                            
-                            if(item.sectorOfBusiness.indexOf(this.state.search)> -1){
+                            if(items.username.indexOf(this.state.search)>-1){
                                 return(
                                     <div style={{display:'inline-block',}}>
+
                                         <div className="feed-banner">
                                         <img src={items.profileImage} alt="profile" className="feed-profile"/> 
-                                        <h6>{items.username}</h6>
+                                        <h6  style={{paddingTop:'15px',paddingLeft:'10px'}}>{items.username} {items.surname}</h6>
                                         </div>
                                         <div style={{display:'inline-block',margin:0}}>
-                                        <img className="project-image" src={items.projectImage} key={items.uid} /><br/>
-                                        <div style={{display:'inline-block'}} key={items.uid} >
+                                        <img className="project-image" src={items.projectImage}  /><br/>
+                                        <div style={{display:'inline-block'}}  >
                                         <div>
-                                            <input type="submit" value="Message" onClick={()=>this.drawerToggleClickHandler(items.uid)} />
+                                            <h3  onClick={()=>this.drawerToggleClickHandler(items.uid, items.projectId)}
+                                                style={{marginLeft:'350px'}}
+                                            >
+                                                <FontAwesomeIcon icon={faCommentDots} color="orange" size={90}/>
+                                            </h3> 
                                         </div>
-                                        <h5 key={items.uid} >{items.projectTitle}</h5>
-                                        <h8 key={items.uid} >{items.projectStatus}</h8>
-                                        <p key={items.uid} >{items.projectDescription}</p>
+                                        <h5>{items.projectTitle}</h5>
+                                        <h8>{items.projectStatus}</h8>
+                                        <p>{items.projectDescription}</p>
+                                        </div>
+                                        </div>                           
+                                    </div>
+                                    
+                                )
+                            }else if(this.state.search === ''){
+                                return(
+                                    <div style={{display:'inline-block',}}>
+
+                                        <div className="feed-banner">
+                                        <img src={items.profileImage} alt="profile" className="feed-profile"/> 
+                                        <h6  style={{paddingTop:'15px',paddingLeft:'10px'}}>{items.username} {items.surname}</h6>
+                                        </div>
+                                        <div style={{display:'inline-block',margin:0}}>
+                                        <img className="project-image" src={items.projectImage}  /><br/>
+                                        <div style={{display:'inline-block'}}  >
+                                        <div>
+                                            <input type="submit"  onClick={()=>this.drawerToggleClickHandler(items.uid, items.projectId)}></input>
+                                        </div>
+                                        <h5>{items.projectTitle}</h5>
+                                        <h8>{items.projectStatus}</h8>
+                                        <p>{items.projectDescription}</p>
                                         </div>
                                         </div>                           
                                     </div>
                                     
                                 )
                             }
+                            
+                               
+                            
 
                         })}
-
+                        
                     </div>
 
             
@@ -340,7 +450,9 @@ componentDidMount(){
         })}
     
         </div>
-    
+        <div className="feed-gradient-footer">
+
+        </div>
     
     </div>
         )

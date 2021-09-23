@@ -1,12 +1,20 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import Navigation from './Navigation';
+import content from '../assets/content.png'
 
 
 const financeScreen = ()=>{
-// displays finances information
+// displays finances content
     return(
-        <div>
+        <div style={{backgroundColor:'white'}}>
+             <img src={content}   style={{
+                position:'absolute',
+                width:'100%',
+                height: '3000px',
+                backgroundRepeat:'repeat-y',
+                marginTop:'50px'
+            }}
+        />
             <div className="finances-content">
    
                 <h1>Finances For Start-Ups</h1>

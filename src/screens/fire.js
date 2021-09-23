@@ -14,7 +14,13 @@ import firebase from 'firebase';
  };
  // Initialize Firebase
 const fire=  firebase.initializeApp(firebaseConfig);
-
+export const onMessageListener=()=>{
+  new Promise((resolve)=>{
+    firebase.messaging().onMessage((payload)=>{
+      resolve(payload);
+    })
+  })
+}
 
 
 export default fire;

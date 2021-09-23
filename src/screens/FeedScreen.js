@@ -1,8 +1,10 @@
+
 import React, { Component } from 'react';
 import fire from './fire';
 import Chart from 'react-google-charts';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faArrowCircleLeft, faCogs,faArrowCircleRight} from '@fortawesome/free-solid-svg-icons'
+import combination from '../assets/feed2.png';
 class FeedScreen extends Component{
 constructor(props){
   super(props);
@@ -36,7 +38,7 @@ constructor(props){
       ChatID:'',
       thisU: `${fire.auth().currentUser.uid}`,
       uid:'',
-      status:'Add Contact',
+      status:'Follow',
   }
 
   // bind this to all functions
@@ -55,20 +57,20 @@ constructor(props){
 //handles follow functionality
 handleFollow(uid,username,profileImage){
   
-  if(this.state.status === 'Add Contact'){
+  if(this.state.status === 'Follow'){
 
     // stores follower in the contacts section of database of the current user
     fire.database().ref(`contacts/${fire.auth().currentUser.uid}/${this.state.key}`).set({
       uid: uid,
       username: username,
       profileImage: profileImage,
-    }).then(this.setState({status: 'Added'}));
+    }).then(this.setState({status: 'Following'}));
   }
 
 
-  if(this.state.status === 'Added'){
+  if(this.state.status === 'Following'){
     // if the user unfollows their information is removed from the database.
-    fire.database().ref(`contacts/${fire.auth().currentUser.uid}/${this.state.key}`).remove().then(this.setState({status: 'Add Contact'}))
+    fire.database().ref(`contacts/${fire.auth().currentUser.uid}/${this.state.key}`).remove().then(this.setState({status: 'Follow'}))
   }
 }
 
@@ -208,12 +210,12 @@ componentDidMount(){
 })
 
 // retrieves entrepreneur Information and then stores it into a state.
-  fire.database().ref(`users/`).on('value', snapshot =>{
+  fire.database().ref(`users`).on('value', snapshot =>{
     
     if(snapshot.exists()){
         let userInfo = snapshot.val();
         let userKeys = Object.keys(userInfo);
-        const extensionArray = [];
+        let extensionArray = [];
       for(let x = 0; x< userKeys.length; x++){
         
         var key = userKeys[x];
@@ -224,10 +226,8 @@ componentDidMount(){
             id:userKeys[x],
             profileImage: item.profileImage,
             username: item.username,
-            surname: item.surname,
             companyName: item.companyName,
-            companyDescription: item.companyDescription
-            
+            sector: item.sector,
           })
           extensionArray[x] = newItems;
           this.setState({users:extensionArray});
@@ -292,9 +292,10 @@ componentDidMount(){
                 tag1: item.tag1,
                 tag2: item.tag2,
                 tag3: item.tag3,
-                sectorOfBusiness: item.sectorOfBusiness,
+                sector: item.sector,
+            
               })
-              extensionArray = [...extensionArray, NewItems];
+              extensionArray[x] = NewItems;
               this.setState({query: extensionArray});
             })
         }
@@ -338,7 +339,8 @@ componentDidMount(){
 }
 render(){
   return(
-    <div >
+    <div style={{backgroundColor:'white', height:'1500px',paddingTop:'10px'}} >
+      <img src={combination} width={1200} height={500}  style={{pointerEvents:'none', position:'absolute'}}/>
       <div className="feed-search">
         <input type="text" 
         name="search"
@@ -530,7 +532,7 @@ render(){
                         if(variable.id === post.uid){
                           return(
                         
-                            <img className="profileView-posts" src={post.projectImage} onClick={()=>this.drawerToggleClickHandler1(post.uid)}/>  
+                            <img className="profileView-posts" src={post.projectImage} onClick={()=>this.drawerToggleClickHandler1(post.uid)} alt=""/>  
                           ) 
                         }
                                               
@@ -553,64 +555,22 @@ render(){
       <div className="feed-gradient">
 
       </div>
-      <div className="feed-container">
+      <div className="feed-container" style={{marginTop:'600px'}}>
 
- 
+      
         {this.state.query.map(items=>items.map((value,index)=>{
-            if(this.state.search > -1 ){
+            if(value.sector === this.state.search){
               return(
+                <div>
+                  
                 <div className="feed-content" key={value.id}>
                   {this.state.users.map(user=>user.map(variable=>{
                     if(value.id === variable.id){
 
                       return(
-                        <div>
                         <div style={{display:'inline-block'}} >
                           <img src={variable.profileImage} alt="profile" className="feed-profile"/>
-                          <span><h6 onClick={()=>this.drawerToggleClickHandler(value.id)}>{variable.username} {variable.surname}</h6></span><br/>
-                        </div>
-                        <div style={{display:'inline-block'}}>
-                            <Chart
-                              chartType="PieChart"
-                              width={400}
-                              height={400}
-                              loading={<div>Loadiing Chart...</div>}         
-                              data={[["labels","percentages"],
-                              [value.tag1,value.point1],
-                              [value.tag2,value.point2],
-                              [value.tag3, value.point3]
-                          ]}
-                          options={{title: 'Overview of Business'}}
-                            />
-                            <h6>{variable.companyName}</h6><br/>
-                            <p>{variable.companyDescription}</p>
-                            </div>
-                        </div>
-                      )
-                    }
-
-                  }))}
-
-                  
-                </div>
-
-              )
-            }else if(this.state.search > -1){
-              console.log(Object.values(value)[index]);
-              return(
-                <div className="feed-content" key={value.id}>
-                {this.state.users.map(user=>user.map(variable=>{
-                    console.log(user);
-                    if(value.id === variable.id){
-                      return(
-                        <div style={{display:'inline-block'}}>
-                          <img  
-                          src={variable.profileImage} 
-                          alt="profile" 
-                          className="feed-profile"
-                          onClick={()=>this.drawerToggleClickHandler(value.id)}
-                          />
-                          <span><h6 onClick={()=>this.drawerToggleClickHandler(value.id)}>{variable.username} {variable.surname}</h6></span><br/>
+                          <span><h6 onClick={()=>this.drawerToggleClickHandler(value.id)}>{variable.username}</h6></span><br/>
                         </div>
                       )
                     }
@@ -632,7 +592,48 @@ render(){
                 </div>
 
                 </div>
+                </div>
+              )
+            }else if(value.sectorOfBusiness === this.state.sectorOfBusiness){
+              console.log(Object.values(value)[index]);
+              return(
+                <div>
+                  
+                <div className="feed-content" key={value.id}>
+                {this.state.users.map(user=>user.map(variable=>{
+                    console.log(user);
+                    if(value.id === variable.id){
+                      return(
+                        <div style={{display:'inline-block'}}>
+                          <img  
+                          src={variable.profileImage} 
+                          alt="profile" 
+                          className="feed-profile"
+                          onClick={()=>this.drawerToggleClickHandler(value.id)}
+                          />
+                          <span><h6 onClick={()=>this.drawerToggleClickHandler(value.id)}>{variable.username}</h6></span><br/>
+                        </div>
+                      )
+                    }
 
+                  }))}
+                <div style={{display:'inline-block'}}>
+                <Chart
+                  chartType="PieChart"
+                  width={400}
+                  height={400}
+                  loading={<div>Loadiing Chart...</div>}         
+                  data={[["labels","percentages"],
+                  [value.tag1,value.point1],
+                  [value.tag2,value.point2],
+                  [value.tag3, value.point3]
+              ]}
+              options={{title: 'Overview of Business'}}
+                />
+                </div>
+
+                </div>
+                </div>
               )
             }
         })

@@ -1,7 +1,10 @@
 import React,{useState} from 'react';
 import validate from './validateInfo';
-import logo from '../assets/nilenet.png' ;
+//import logo from '../assets/nilenet.png' ;
+import Avatar from '../assets/logo .png'
 import useForm from './useForm';
+import {FaEnvelope, FaLock} from 'react-icons/fa';
+
 
 const InvestorLogin =()=>{
 
@@ -15,104 +18,202 @@ const InvestorLogin =()=>{
 
     return(
      
-        <div>
-            <img alt="logo" src={logo} className ='logo-img'/>
-            <div className='box'>
-                  {hasAccount ? (
+        <div >
+
+      
+            
+            <div class= "login-wrapper">
+                  {hasAccount ? 
+                  (
                       <>
-                      <h1>SIGN IN</h1>
+                      <div className="form" >
+                          <img src={Avatar} alt=""/>
+                     <h2>Sign In</h2>
+                    
+                     <div className="input-group">
                         <input type = "text" 
-                        className= "box-input"
+                       // className= "box-input"
                         autoFocus 
                         required 
                         value={values.email} 
                         name ="email"
                         onChange = {handleChange}
-                        placeholder='Insert Email'
-                        /><br/>
+                        //placeholder='Insert Email'
+                        />
+                        <label><FaEnvelope/> Email</label>
+
+                    </div>
+
                         <p>{errors.email}</p>
+
+
+
+                        <div className="input-group">
                         <input type = "password"
-                        className= "box-input"
+                     
                         required value={values.password} 
                         name="password"
                         onChange = {handleChange}
-                        placeholder= "Insert Password"
-                        /><br/>
+                       // placeholder= "Insert Password"
+                        />
+                        <label><FaLock/> Password</label>
+                        </div>
                         <p>{errors.password}</p>
-                        <input type="submit" className="box-btn" onClick={()=>{HandleLogin()}} value="Sign In" />
-        
-                      <p>Dont have an Account? <span className="box-span" onClick={()=> sethasAccount(!hasAccount)} >Sign up</span></p>
-                      <p>Forgot Password? <span className="box-span" onClick={()=>{handlePasswordReset(values.email)}}>Reset</span></p>
+                        <input 
+                        type="submit" 
+                        className="box-btn"
+                        onClick={()=>HandleLogin()} 
+                        value="Sign In" />
+                     <br/>
+                       
+                      <p>Dont have an Account? <span 
+                      className="box-span"
+                      onClick={()=> sethasAccount(!hasAccount)} >Sign up</span></p>
+                      
+                      <p>Forgot Password? <span 
+                     className="box-span"
+                      onClick={()=>{handlePasswordReset(values.email)}}>Reset</span></p> 
+                      </div>
+
+                      
                       </>
-                  ): (
+                  ):
+                  
+
+                 
+                  (
                       <>
-                      <h1>SIGN UP</h1>
-                      <input type = "text" 
-                        autoFocus
-                        className= "box-input"
-                        required 
-                        value={values.email} 
-                        name ="email"
-                        onChange = {handleChange}
-                        placeholder='Insert Email'
-                        /><br/>
-                        <p>{errors.email}</p>
+
+                      <div  className = "form" >
+                          <img src={Avatar} alt="">
+                              
+                          </img>
+                          <h2>Sign Up</h2>
+                         
+                        <div className="input-group">
+                            <input type = "text" 
+                             autoFocus
+                             required 
+                            value={values.email} 
+                             name ="email"
+                             onChange = {handleChange}
+                        
+                        />
+
+
+                        <label for="email"><FaEnvelope/> Email</label>
+                        </div>
+                        <div className="input-group">
                         <input type = "text" 
-                        autoFocus
-                        className= "box-input"
+                       // className= "box-input"
+                        autoFocus 
                         required 
                         value={values.username} 
-                        name ="email"
+                        name ="username"
                         onChange = {handleChange}
-                        placeholder='Insert Email'
-                        /><br/>
-                        <p>{errors.username}</p>
+                        //placeholder='Insert Email'
+                        />
+                        <label><FaEnvelope/> Username</label>
+
+                    </div>
+                    <div className="input-group">
                         <input type = "text" 
-                        autoFocus
-                        className= "box-input"
+                       // className= "box-input"
+                        autoFocus 
                         required 
                         value={values.surname} 
-                        name ="email"
+                        name ="surname"
                         onChange = {handleChange}
-                        placeholder='Insert Email'
-                        /><br/>
-                        <p>{errors.surname}</p>
-                        <select className="box-select"
-                            name="type"
-                            value={values.sectorOfBusiness}
-                            onChange={handleChange}
-                        >
-                            <option></option>
+                        //placeholder='Insert Email'
+                        />
+                        <label><FaEnvelope/>Surname</label>
+
+                    </div>
+                    <div className="input-group">
+                        <input type = "text" 
+                       // className= "box-input"
+                        autoFocus 
+                        required 
+                        value={values.companyName} 
+                        name ="companyName"
+                        onChange = {handleChange}
+                        //placeholder='Insert Email'
+                        />
+                        <label><FaEnvelope/>Company Name</label>
+
+                    </div>
+                      <div className="input-group" >
+                        <p>{errors.email}</p>
+                        <select 
+                        name="sectorOfBusiness"
+                        value={values.sectorOfBusiness}
+                        onChange={handleChange}>
+                            
+                            <option value="sectorType">--Sector--</option>
                             <option value="tourism">Tourism</option>
-                            <option value= "maufacturing">Manufacturing</option>
-                            <option value= "agriculture">Agriculture</option>
-                            <option value= "finances">Finances</option>
-                        </select><br/>   
-                        <select className="box-select"
+                            <option value="manufacturing">Manufacturing</option>
+                            <option value="agriculture">Agriculture</option>
+                            <option value="finance">Finance</option>
+                            <option value="other">Other</option>
+                        </select>
+
+                        <br/>
+                      
+
+                        <select 
                             name="type"
                             value={values.type}
                             onChange={handleChange}
+                           // placeholder="Select type"
                         >
-                            <option></option>
+                            <option value="UserType">--User Type--</option>
                             <option value="Entrepreneur"> Entrepreneur</option>
                             <option value= "Investor">Investor</option>
-                        </select><br/>
-                        <input type = "password"
-                        className= "box-input" 
+                        </select>
+
+                    </div>
+                    <br/>
+                    <div className="input-group">
+
+                    </div>
+                       <div className="input-group">
+                           <input type = "password"
+                       
                         required value={values.password} 
                         name="password"
                         onChange = {handleChange}
-                        placeholder= "Insert Password"
-                        /><br/>
+                       
+                        />
+                        <label for="password"><FaLock/> Password</label>
+                       </div>
+                        
                         <p>{errors.password}</p>
-                      <input type="password" required value= {values.password2} 
-                      className= "box-input"
+                        <div className="input-group">
+
+                               <input type="password" required value= {values.password2} 
+                     
                       onChange={handleChange}
                       name = "password2"
-                      placeholder="Confirm Password"/><br/>
+                 
+                     />
+
+                      <label for="passweord2"><FaLock/> Confirm Password</label>
+                        </div>
+                   
+                         
+
+
                       <p>{errors.password2}</p>
-                      <input type="submit" className="box-btn" onClick={handleSignup} value= "Sign Up"/>
-                      <p>Have an Account? <span className="box-span" onClick={()=> sethasAccount(!hasAccount)}>Sign in</span></p>
+                      <input type="submit" 
+                      className="box-btn" 
+                      onClick={handleSignup} 
+                      value= "Sign Up"
+                      />
+                      <br/>
+                      <p>Have an Account? <span 
+                      className="box-span" onClick={()=> sethasAccount(!hasAccount)}>Sign in</span></p>
+                      
+                      </div>
                       
                       </>
 

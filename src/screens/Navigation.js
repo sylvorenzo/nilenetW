@@ -1,20 +1,20 @@
 import React, { useEffect,useState } from 'react';
 import { NavLink } from 'react-router-dom';
-import { NavItem, Navbar} from 'reactstrap';
+import { NavItem} from 'reactstrap';
 import {Nav} from 'react-bootstrap';
 import logo from '../assets/nilenet.png' ;
 import validate from './validateInfo';
 import useForm from './useForm';
 import fire from './fire';
 import '../components/styles.css';
+import {FaBars, FaChartLine, FaChartPie, FaCogs, FaHome, FaPlusCircle, FaSignOutAlt, FaTh, FaUser, FaWindowRestore, FaWrench} from 'react-icons/fa';
+
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faArrowCircleLeft, 
-  faUserCircle, 
   faSignOutAlt,
   faWindowRestore, 
   faHome,
   faWrench,
-  faChartPie, 
   faChartLine, 
   faTh, 
   faPlusCircle,
@@ -90,13 +90,16 @@ const Navigation = () => {
     },[])
 
     return (
+      
      
       <div>
         { // displays data to the front End
         items.map(item=>{
           if(item.type === 'Investor'){
             return(
+
               <nav className="navbar">
+
                 <div show={values.drawerOpen} className={values.drawerClasses}>
                   <div className="profileView-TopSection">
                   <div className="profileView-back">
@@ -107,36 +110,44 @@ const Navigation = () => {
 
                   </div>
                   <Nav className="ml-auto">
-                    <NavItem className="navigation-items">
+                  <NavItem className="navigation-items">
                       <NavLink to = '/profile' className="nav-link">
                       <span style={{color:'black'}}>
-                      <FontAwesomeIcon icon={faUserCircle} size='1x' color="black"/> 
+                      
                       <h6>
+                      <FaUser/> 
                         Profile
                       </h6>
                       </span>
                       </NavLink>
                     </NavItem>
+
                   <NavItem className="navigation-items" >
                       <NavLink to="/" className="nav-link" color="black">
                       <span style={{color:'black'}}>
-                      <FontAwesomeIcon icon={faHome} size='1x' color="black"/> 
                       <h6>
+                        <FontAwesomeIcon icon={faHome} size='1x' color="black"/>
                         Home
                       </h6>
                       </span>
                       </NavLink>
                     </NavItem>
+
+
+
+
+
                     <NavItem className="navigation-items">
                       <NavLink to="/resources" className="nav-link">
                       <span style={{color:'black'}}>
-                      <FontAwesomeIcon icon={faWindowRestore} size='1x' color="black"/> 
                       <h6>
+                      <FontAwesomeIcon icon={faWindowRestore} size='1x' color="black"/> 
                         Resources
                       </h6>
                       </span>
                       </NavLink>
                     </NavItem>
+
                     <NavItem className="navigation-items">
                     <NavLink to="/feed" className="nav-link">
                     <span style={{color:'black'}}>
@@ -202,8 +213,10 @@ const Navigation = () => {
                   </Nav>
                 </div>
               <div className="container-fluid">
+
                   <a href="/"><img  alt = 'logo' className="nav-logo"src={logo} size="20px"/></a>
-                    <NavItem>
+                  <div className="decorative-container">
+                  <NavItem>
                     {
                         state ?(
                           Posts.map(item=>{
@@ -218,19 +231,27 @@ const Navigation = () => {
                             })
                           
                         ):(
-                          <h6 onClick={drawerToggleClickHandler}>menu</h6>
+                          <h6 onClick={drawerToggleClickHandler}><FaBars/></h6>
                         )
                       }
-                    </NavItem>
+                    </NavItem>              
+                  </div>
+
               </div>
             </nav>
         
             )
-          }else if(item.type === "Entrepreneur"){
+          }
+          else if(item.type === "Entrepreneur"){
             return(
+
+              
+
+              
               
               <nav className="navbar">
-                <div show={values.drawerOpen} className={values.drawerClasses}>
+
+                <div show={values.drawerOpen} className={values.drawerClasses} >
                   <div className="profileView-TopSection">
                   <div className="profileView-back">
                       <h2 className="profileView-icon" onClick={drawerCloser1}>
@@ -239,116 +260,118 @@ const Navigation = () => {
                   </div>
 
                   </div>
+                  
                   <Nav className="ml-auto">
-                    <NavItem className="navigation-items">
+                  <NavItem className="navigation-items">
+                  <NavItem className="navigation-items">
                       <NavLink to = '/profile' className="nav-link">
-                      <span style={{color:'black'}}>
-                      <FontAwesomeIcon icon={faUserCircle} size='1x' color="black"/> 
-                      <h7 style={{padding: '10px'}}>
-                        Profile
+        
+                      
+                      <h7>
+                        <FaUser/> Profile
                       </h7>
-                      </span>
+                      
                       </NavLink>
                     </NavItem>
-                  <NavItem className="navigation-items" >
+                    <NavLink to="/mybusiness" className="nav-link">
+                  
+                      
+                      <h7><FaChartPie/> Statistics</h7>
+                   
+                      </NavLink>
+                    </NavItem>
+
+                    <NavItem className="navigation-items" >
                       <NavLink to="/" className="nav-link" color="black">
-                      <span style={{color:'black'}}>
-                      <FontAwesomeIcon icon={faHome} size='1x' color="black"/>    
-                      <h7 style={{padding: '10px'}}>
-                        Home
+                   
+                         
+                      <h7>
+                        <FaHome/> Home
                       </h7>
-                      </span> 
                       </NavLink>
                     </NavItem>
+
                     <NavItem className="navigation-items">
                       <NavLink to="/resources" className="nav-link">
-                      <span style={{color:'black'}}>
-                      <FontAwesomeIcon icon={faWindowRestore} size='1x' color="black"/><br/>
-                      <h8>
-                        Resources
-                      </h8>
-                      </span>
+                      
+                      
+                      <h7><FaWindowRestore/> Resources</h7>
+                     
                       </NavLink>
                     </NavItem>
-                    <NavItem className="navigation-items">
-                    <NavLink to="/feed" className="nav-link">
-                    <span style={{color:'black'}}>
-                      <FontAwesomeIcon icon={faTh} size='1x' color="black"/> 
-                      <div>
-                        <h7 >Feed</h7>
-                      </div>
-                      </span>
-                      </NavLink>
-                    </NavItem>
-                    <NavItem className="navigation-items">
-                    <NavLink to="/projects" className="nav-link">
-                    <span style={{color:'black'}}>
-                      <FontAwesomeIcon icon={faCogs} size='1x' color="black"/> 
-                      <div>
-                        <h7 >Projects</h7>
-                      </div>
-                      </span>
-                      </NavLink>
-                    </NavItem>
-                    <NavItem className="navigation-items">
-                    <NavLink to="/createpost" className="nav-link">
-                    <span style={{color:'black'}}>
-                      <FontAwesomeIcon icon={faPlusCircle} size='1x' color="black"/> 
-                      <div>
-                        <h7 >Create Post</h7>
-                      </div>
-                      </span>
-                      </NavLink>
-                    </NavItem>
+
                     <NavItem className="navigation-items">
                     <NavLink to="/opportunities" className="nav-link">
-                    <span style={{color:'black'}}>
-                      <FontAwesomeIcon icon={faChartLine} size='1x' color="black"/> 
-                      <h6>
-                        Opportunities
-                      </h6>
-                      </span>
+                   
+                      
+                      <h7><FaChartLine/> Opportunities
+                      </h7>
+                     
                       </NavLink>
                     </NavItem>
+
                     <NavItem className="navigation-items">
-                    <NavLink to="/mybusiness" className="nav-link">
-                    <span style={{color:'black'}}>
-                      <FontAwesomeIcon icon={faChartPie} size='1x' color="black"/> 
-                      <h6>
-                        My Business
-                      </h6>
-                      </span>
+                    <NavLink to="/feed" className="nav-link">
+                    
+                     
+                       
+                        <h7 ><FaTh/> Feed</h7>
+                      
+                      
                       </NavLink>
                     </NavItem>
+
+                    <NavItem className="navigation-items">
+                    <NavLink to="/projects" className="nav-link">
+                   
+                    
+                      
+                        <h7><FaCogs/> Projects</h7>
+                      
+                   
+                      </NavLink>
+                    </NavItem>
+
+                    <NavItem className="navigation-items">
+                    <NavLink to="/createpost" className="nav-link">
+                    
+                      
+                      
+                        <h7><FaPlusCircle/> Create Post</h7>
+                      
+                     
+                      </NavLink>
+                    </NavItem>
+
+
+
+
                     <NavItem className="navigation-items">
                     <NavLink to="/support" className="nav-link">
-                      <span style={{color:'black'}}>
-                      <FontAwesomeIcon icon={faWrench} size='1x' color="black"/> 
-                      <h6>
-                        Support
-                      </h6>
-                      </span>
+                     
+                      
+                      <h7><FaWrench/> Support</h7>
+                     
                       </NavLink>
                     </NavItem>
+
                     <NavItem onClick={()=>handleLogout(fire.auth().currentUser)} className="navigation-items">
                       <NavLink to = '/' className="nav-link">
-                      <span style={{color:'black'}}>
-                      
-                        <FontAwesomeIcon icon={faSignOutAlt} size="1x" color="black"/> 
-                      <h6>
-                        Sign Out
-                      </h6>
-                      </span>
+                     
+                      <h7><FaSignOutAlt/> Sign Out
+                      </h7>
+                    
                       </NavLink>
-
                     </NavItem>
                   </Nav>
+
                 </div>
              
               <div className="container-fluid">
-                  <a href="/"><img  alt = 'logo' className="nav-logo"src={logo} size="20px"/></a>
-                    <NavItem>
-                    {// if theres a profile image, a profile image should be displayed. If not a menu text should be
+                  <a href="/"><img  alt = 'logo' className="nav-logo"src={logo} size="30px"/></a>
+                  <div className="decorative-container">
+                  <NavItem>
+                    {
                         state ?(
                           Posts.map(item=>{
 
@@ -362,10 +385,11 @@ const Navigation = () => {
                             })
                           
                         ):(
-                          <h6 onClick={drawerToggleClickHandler}>menu</h6>
+                          <h6 onClick={drawerToggleClickHandler}><FaBars size={30} color="#ff4d00"/></h6>
                         )
                       }
-                    </NavItem>
+                    </NavItem>              
+                  </div>
               </div>
             </nav>
             )

@@ -106,7 +106,7 @@ function deleteContent(projectId){
                 });
             }
          })
-    
+         // retrieves current user posts.
          fire.database().ref(`posts/entrepreneurs/${fire.auth().currentUser.uid}`).orderByValue().on('value',snapshot=>{
             
             if(snapshot.exists()){
@@ -204,16 +204,16 @@ function deleteContent(projectId){
                     <h7>{type}</h7><br/>
         
                    <button className="profile-btn">
-                       <NavLink to='/chat'>
+                       <a href='/chat' style={{textDecoration:'none',color:'white'}}>
                         Contacts
-                       </NavLink>
+                       </a>
   
                    </button>
                        {typeReader ?(
                         <button className="profile-btn" >
-                        <NavLink to ='/editprofile'>
+                        <a href='/editprofile' style={{textDecoration:'none',color:'white'}}>
                             Edit Profile
-                        </NavLink>
+                        </a>
                      </button> 
                        ):(
                         <button className="profile-btn" >

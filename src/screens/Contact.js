@@ -3,11 +3,12 @@ import './App.css';
 import fire  from './fire';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faEnvelopeSquare, faUpload,faMapMarkerAlt,faPhoneSquareAlt} from '@fortawesome/free-solid-svg-icons';
-
+import combination from '../assets/content.png';
 
 
 
 const Contact = () => {
+  // this is where the support page content is programmed.
 
    const [name, setName] = useState("");
    const [email,setEmail]=useState("");
@@ -44,7 +45,8 @@ const Contact = () => {
      
       
 
-      <span >
+      <div style={{paddingTop:'10px',backgroundColor:'white'}}>
+        <img src={combination} width={1200} height={1200}  style={{pointerEvents:'none', position:'absolute',marginTop:'10px'}}/>
 
 <span class= "faq">
 
@@ -122,9 +124,9 @@ There are instances when you no longer use or have access to the email address u
 
 </span>
 
-  <div className ="contactUs">
-        <h1>Contact Us</h1>
-        <p>This is where information is displayed</p>
+  <div className ="contactUs" style={{position:'absolute',paddingLeft:'70px'}}>
+        <h1 style={{color:'black'}}>Contact Us</h1>
+        <p style={{color:'black'}}>This is where information is displayed</p>
       <div className="contactInfo">
         <div className="contact-section">
           <h3><FontAwesomeIcon icon={faMapMarkerAlt} size="2x" className="fontawesome"/> Address</h3>
@@ -157,7 +159,7 @@ There are instances when you no longer use or have access to the email address u
 
       </div>
      </div>
-      </span>
+      </div>
 
       
       
