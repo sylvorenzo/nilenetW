@@ -105,7 +105,7 @@
     color: orange;
 }
 .container{
-    margin-left: 50%;
+    margin-left: 5%;
     width: 200px;
     background-color: white;
     height: 310px;
@@ -203,6 +203,7 @@ button{
     .contactUs
     {
         padding: 50px;
+        text-align: left;
     }
 
     .container
@@ -219,6 +220,24 @@ button{
     {
         width:100%;
 
+    }
+}
+@media screen and (max-width:600px){
+    .contactUs{
+        padding-left: 5px;
+    }
+    .contactForm{
+        width: 350px;
+    }
+    .container{
+        float: left;
+        margin: 2px;
+    }
+    .inputBox{
+        width: 100px;
+    }
+    .area{
+        width: 200px;
     }
 }
     

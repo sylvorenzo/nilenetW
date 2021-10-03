@@ -38,7 +38,7 @@ constructor(props){
       ChatID:'',
       thisU: `${fire.auth().currentUser.uid}`,
       uid:'',
-      status:'Follow',
+      status:'Add Contact',
   }
 
   // bind this to all functions
@@ -339,8 +339,8 @@ componentDidMount(){
 }
 render(){
   return(
-    <div style={{backgroundColor:'white', height:'1500px',paddingTop:'10px'}} >
-      <img src={combination} width={1200} height={500}  style={{pointerEvents:'none', position:'absolute'}}/>
+    <div style={{backgroundColor:'white', height:'1500px',paddingTop:'10px'}} className="feed-div" >
+      <img src={combination} width={1200} height={500}  style={{pointerEvents:'none', position:'absolute'}} className="feed-image"/>
       <div className="feed-search">
         <input type="text" 
         name="search"
@@ -555,7 +555,7 @@ render(){
       <div className="feed-gradient">
 
       </div>
-      <div className="feed-container" style={{marginTop:'600px'}}>
+      <div className="feed-container" >
 
       
         {this.state.query.map(items=>items.map((value,index)=>{

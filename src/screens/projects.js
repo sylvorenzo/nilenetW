@@ -366,7 +366,7 @@ componentDidMount(){
                 </div>
 
             </div>
-            <img src={combination} width={1200} height={600}  style={{pointerEvents:'none', position:'absolute'}}/>
+            <img src={combination} width={1200} height={600}  style={{pointerEvents:'none', position:'absolute'}} className="feed-image"/>
             <div className="feed-search">
                 <input type="text" 
                 className="feed-input" 
@@ -379,7 +379,7 @@ componentDidMount(){
             <div className="feed-gradient">
 
             </div>
-        <div className="feed-container" style={{marginTop:'600px'}}>
+        <div className="feed-container">
         {this.state.Posts.map((items, index) =>{
 
             return(

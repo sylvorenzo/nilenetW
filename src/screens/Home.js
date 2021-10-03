@@ -7,11 +7,11 @@ import combination from '../assets/combination.svg';
 const HomeScreen =()=>{
 
     return(
-<div style={{display:'inline-block',backgroundColor:'white'}}>
+<div style={{display:'inline-block',backgroundColor:'white'}} className="home-div">
     
-        <img src={combination} width={1200} height={80} style={{position:'absolute'}} />
-        <h2 style={{fontFamily:'sans-serif', color:'#ff4d00', textAlign:'center', fontSize:'20px',marginTop:'80px'}}>AFRICA'S MOST POWERFUL <span style={{fontWeight:'bold'}}>SHARED VALUE</span> BUSINESS NETWORK</h2>
-        <img src={overview} width={1200} height={500} style={{pointerEvents:'none'}}/>
+        <img src={combination} className="banner-image" />
+        <h2 style={{fontFamily:'sans-serif', color:'#ff4d00', textAlign:'center', fontSize:'20px',marginTop:'140px'}}>AFRICA'S MOST POWERFUL <span style={{fontWeight:'bold'}}>SHARED VALUE</span> BUSINESS NETWORK</h2>
+        <img src={overview} width={1200} height={500} style={{pointerEvents:'none'}} className="home-image"/>
         <div className="resource-body">
 
             <div className="home-content">

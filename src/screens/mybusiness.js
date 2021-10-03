@@ -264,8 +264,8 @@ const MyBusinessScreen = ()=>{
 
         return(
 
-        <div style={{backgroundColor:'white',paddingTop:'10px'}}>
-            <img src={combination} width={1200} height={720}  style={{pointerEvents:'none', position:'absolute',}}/>
+        <div style={{backgroundColor:'white',paddingTop:'10px'}} className="statistics">
+            <img src={combination} width={1200} height={720}  style={{pointerEvents:'none', position:'absolute',}} className="stats-image"/>
 
         <div show ={drawerOpen} className={drawerClasses}>
             <div className="profileView-TopSection">
@@ -361,8 +361,8 @@ const MyBusinessScreen = ()=>{
                 <div className="business-chart" toggle={drawerToggleClickHandler}>
                     <Chart
                         chartType="PieChart"
-                        width={400}
-                        height={400}
+                        width={300}
+                        height={300}
                         data={[["labels","percentages"],
                             [tag[0]|| 'Start Up Success',datapoints[0]|| 0],
                             [tag[1]|| 'Start Up Moderate', datapoints[1]|| 0],
@@ -374,7 +374,7 @@ const MyBusinessScreen = ()=>{
                <div className="business-content" style={{position:'relative', backgroundColor:'transparent', marginTop:'20px'}}>
                   <h1>Welcome to My Statistics</h1>
                    <p>My Statistics is a feature where we use machine learning to predict the 
-                       succ<span style={{color:'white'}}>ess of your start up</span> and the measures one should take when your start Up 
+                       success of your start up and the measures one should take when your start Up 
                        is in danger
                    </p>
                    <input type="submit" value="Generate Report" onClick={drawerToggleClickHandler} className="terms-btn"/>

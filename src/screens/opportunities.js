@@ -7,12 +7,12 @@ import sva1 from '../assets/sva1.jpg'
 const OpportunitiesScreen = ()=>{
 
     return(
-        <div style={{backgroundColor:'white',paddingTop:'10px',height:'1500px'}}>
-            <img src={combination} width={1200} height={700}  style={{pointerEvents:'none', position:'absolute'}}/>
+        <div style={{backgroundColor:'white',paddingTop:'10px',height:'1500px'}} className="opportunities-div">
+            <img src={combination} width={1200} height={700}  style={{pointerEvents:'none', position:'absolute'}} className="opportunities-image"/>
             <div className="Opportunities-section">
 
                 <div className="opportunities-content">
-                   <img src={svai} width={400} height={500} />
+                   <img src={svai} width={400} height={500} className="opportunities-image" />
                 </div>
                 <div className="opportunities-links">
                    <h2>ENTREPRENEURS ONLY:</h2>
@@ -44,8 +44,8 @@ const OpportunitiesScreen = ()=>{
                         }
                 }>Register Here</a> 
                 </div>
-                <div className="opportunities-content" style={{marginTop:'200px'}}>
-                   <img src={sva1} width={400} height={500} />
+                <div className="opportunities-content" style={{marginTop:'800px', display:'inline-block'}}>
+                   <img src={sva1} width={400} height={500} className="opportunities-image"/>
                 </div>
                 <div className="opportunities-links" style={{marginTop:'200px'}}>
                    <h2>CALL FOR ENTRIES:</h2>

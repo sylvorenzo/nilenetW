@@ -8,7 +8,7 @@ class ResourceScreen extends Component{
     render(){
         return(
             <div style={{backgroundColor:'white', height:'20px', paddingTop:'10px'}}>
-                <img src={combination} width={1200} height={700} style={{position:'absolute',}} />
+                <img src={combination} width={1200} height={700} style={{position:'absolute',}} className="resources-image"/>
                 <button className="resource-categories">
                     <Link to='/finances'>
                         Finances 

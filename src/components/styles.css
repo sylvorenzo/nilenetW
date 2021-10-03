@@ -481,6 +481,7 @@ color: #ff652f;
     width: 90%;
     height: 510px;
     overflow-y: scroll;
+    margin-Top:600px
 
 }
 .feed-banner{
@@ -1006,6 +1007,7 @@ color: #ff652f;
     color: black;
     border-top: 1px solid orange;
     background-color: white;
+    
 }
 .opportunities-links{
     padding-top: 3px;
@@ -1193,11 +1195,279 @@ color: #ff652f;
 height: 30px;
 width: 30px;
 }
+.banner-image{
+    width: 1200px;
+    height: 130px;
+    position: absolute;
+}
 
-/* @media screen and (min-width:600px) {
+.projects-div{
+    height: 1500px;
+    padding-top: 10px;
+    background-color: white;
+
+}
+ @media screen and (max-width:600px) {
     .home-content{
         grid-template-columns:repeat(auto-fit,minmax(14rem,16rem));  
     }
+    .banner-image{
+        padding-top: 10px;
+        width: 355px;
+        height: 80px;
+    }
+    .home-image{
+        width: 355px;
+        height: 250px;
+    }
+    .home-div{
+        width: 355px;
+    }
+    .resource-body{
 
-    .
-} */
+        width: 300px;
+        height: 100vh;
+        display: -webkit-inline-box;
+        align-items: center;
+    
+        overflow-y: hidden;
+    
+    }
+    .navbar-side.open{
+        width: 80%;
+    }
+    .profile-pic{
+        width: 50px;
+        height: 50px;
+        align-self: center;
+    }
+    .profile-btn{
+        margin: 10px;
+        width: 120px;
+        height: 60px;
+        background-color: #f85900;
+        border: 2px solid #f85900;
+        text-decoration: none;
+        border-radius: 5px;
+        color: white;
+    }
+    /* Statistics section*/
+    .stats-image{
+        width: 355px;
+        height: 1200px;
+    }
+    .business-chart{
+        margin-right: 50%;
+    }
+    .business-content{
+        width: 300px;
+    }
+    .terms-btn{
+        background-color:#f85900;
+        text-decoration: none;
+        width: 150px;
+        height: 50px;
+        margin-left: 25%;
+        margin-bottom: 50px;
+        border-radius: 25px;
+        border-color:#f85900;
+        outline: none;
+        border: #f85900;
+        color: white;
+    }
+    /*Resources section*/
+    .resources-image{
+        width: 356px;
+        height: 3000px;
+    }
+    /*Opportunities*/
+    .opportunities-image{
+        width: 356px;
+        height: 300px;
+    }
+    .Opportunities-section{
+        background-color: white;
+    
+    
+    }
+    .opportunities-div{
+        width: 356px;
+        height: 2500px;
+    }
+    .opportunities-image{
+        width: 350px;
+        float: none;
+        margin-top: 10px;
+    }
+    .opportunities-links{
+        padding-top: 3px;
+        margin-top: 20px;
+        float: none;
+        height: 555px;
+        width: 100%;
+        color:black;
+        border-top: 1px solid orange;
+        background-color: white;
+    
+    }
+    .opportunities-content{
+        float: none;
+        margin-top: 50px;
+        display: inline-block;
+        background-color: white;
+    }
+    /*feed*/
+    .feed-div{
+        width: 356px;;
+    }
+    .feed-image{
+        width: 356px;
+        height: 200px;
+    }
+    .feed-search{
+        margin-top: 2px;
+        float: none;
+        background-color: transparent;
+        width: 80px;
+        margin-right: 100px;
+    }
+    .feed-input{
+        width: 200px;
+        margin-top: 200px;
+        height: 60px;
+        border-radius: 30px;
+        text-align: center;
+        margin-left: 100px;
+        outline: none;
+        border: 2px solid orange;
+        position: absolute;
+    }
+    .feed-gradient{
+        margin-right: 50px;
+        margin-left: 5px;
+        align-self: center;
+        margin-top: 300px;
+        float: right;
+        width: 90%;
+        height: 50px;
+        position: absolute;
+        background-color: #f85900;
+    }
+    .feed-container{
+        margin-left: 5px;
+        border: 2px solid white;
+        background-color: lightsteelblue;
+        position: relative;
+        padding: 20px;
+        float: none;
+        width: 90%;
+        height: 510px;
+        overflow-y: scroll;
+        margin-top: 350px;
+    
+    }
+    .side-drawer-posts.open{
+        width: 80%;
+    }
+    .side-drawer-message.open{
+        width: 100%;
+    }
+    .side-drawer.open{
+        width: 100%;
+    }
+    .profile-btn{
+        margin: 5px;
+        width: 120px;
+        height: 50px;
+        background-color: #f85900;
+        border: 2px solid #f85900;
+        text-decoration: none;
+        border-radius: 5px;
+        color: white;
+    }
+    /*create post*/
+   .Post-main{
+       height: 2000px;
+   }
+   .input-section{
+    margin-top: 400px;
+    border-radius: 25px;
+    float: none;
+    background-color: lightgray;
+    width: 500px;
+    height: 400px;
+    padding: 10px;
+}
+/* contacts section*/
+.contacts-section{
+    float: left;
+    border-top: 0.5px solid black;
+    width: 40%;
+    height: 100%;
+    background-color: white;
+}
+.contacts-banner{
+    background-color: #f85900;
+    color: white;
+    height: 100px;
+    text-align: center;
+   
+}
+.chat-search{
+    width: 80%;
+    border-radius: 25px;
+}
+.chats-banner{
+    background-color: #f85900;
+    color: white;
+    position: relative;
+    height: 100px;
+    text-align: center;
+}
+.message-input{
+    width: 130px;
+}
+.message-btn{
+    float: right;
+    position: relative;
+    margin-right: 10px;
+    border-radius: 25px;
+}
+/*edit profile*/
+.edit-input-section{
+    border-radius: 25px;
+    float: right;
+    margin-top: 10px;
+    margin-right: 5px;
+    background-color: lightgray;
+    width: 300px;
+    height: 450px;
+    padding: 10px;
+}
+.file-btn{
+    content: 'select image';
+    background-color: #f85900;
+    color: white;
+    text-align: center;
+    padding-top: 10px;
+    height: 50px;
+    border-radius: 25px;
+    width: 250px;
+    margin-bottom: 5px;
+
+}
+.post-textarea{
+    margin-top: 5px;
+    width: 250px;
+}
+.post-btn{
+    background-color: black;
+    border-color: black;
+}
+/* support image*/
+.support-image{
+    width: 350px;
+    height: 2200px;
+}
+    
+} 

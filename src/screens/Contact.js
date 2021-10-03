@@ -46,7 +46,7 @@ const Contact = () => {
       
 
       <div style={{paddingTop:'10px',backgroundColor:'white'}}>
-        <img src={combination} width={1200} height={1200}  style={{pointerEvents:'none', position:'absolute',marginTop:'10px'}}/>
+        <img src={combination} width={1200} height={1200} className="support-image" style={{pointerEvents:'none', position:'absolute',marginTop:'10px'}}/>
 
 <span class= "faq">
 
@@ -152,7 +152,7 @@ There are instances when you no longer use or have access to the email address u
           
           <input className="inputText" required="required" placeholder="Email" value = {email} onChange={(e) => setEmail(e.target.value)}/>
       
-          <textarea  required="required" placeholder="Message..." value = {msg} onChange={(e) => setMsg(e.target.value)}></textarea><br/>
+          <textarea className="area" required="required" placeholder="Message..." value = {msg} onChange={(e) => setMsg(e.target.value)}></textarea><br/>
       
         <button type="submit"  onClick={()=>handleSubmit()} style={{background: loader ? "#ccc" : "#fff"}}><FontAwesomeIcon   icon={faUpload} size = "2em"/>Submit</button>
       </div> 
